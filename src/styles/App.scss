@@ -1,0 +1,46 @@
+@use '_variables' as v;
+body {
+  background-color: v.$bg-color;
+  color: v.$text-primary;
+  font-family: v.$font-text;
+  font-size: v.$font-size-base;
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: v.$text-primary;
+  font-family: v.$font-size-heading; 
+  margin-top: 0;
+}
+
+a {
+  color: v.$accent-secondary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  background: v.$accent-primary;
+  color: v.$color-field-bg;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  font-family: v.$font-title;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: v.$accent-buttons;
+  }
+}
+

@@ -1,0 +1,15 @@
+@use "_variable" as v;
+@mixin highlight(
+  $color: v.$accent-primary,
+  $font-size: 2rem,
+  $bold: false,
+  $border-size: 0px,
+  $border-type: solid
+) {
+  color: $color;
+  font-weight: if($bold, bold, normal);
+  font-size: $font-size;
+  @if ($border-size>0) {
+    border: $border-size $color $border-type;
+  }
+}
