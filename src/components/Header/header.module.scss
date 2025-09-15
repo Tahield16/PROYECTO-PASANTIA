@@ -1,0 +1,23 @@
+// @use 'src/styles/_variables.scss' as v;
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+.header{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap:2rem;
+    padding-inline:2rem;
+}
+.logoContainer{
+    display:flex;
+    gap:1rem;
+    &.title{
+        @include m.highlight($bold:true,$font-size:3rem);
+    }
+}
+.navContainer{
+    display:flex;
+    width:fit-content;
+    gap:3rem;
+}
