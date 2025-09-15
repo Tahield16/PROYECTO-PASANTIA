@@ -1,0 +1,36 @@
+@use '_variables' as v;
+@use '_mixins' as m;
+*{
+ margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+body {
+  background-color: v.$bg-color;
+  color: v.$text-primary;
+  font-family: v.$font-text;
+  font-size: v.$font-size-base;
+ 
+
+}
+
+.title {
+  // color: v.$text-primary;
+  font-family: v.$font-size-heading; 
+  @include m.highlight($bold:true,$border-size:2px);
+  margin-top: 0;
+}
+
+a {
+  color: v.$accent-secondary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  @include m.button();
+}
+
