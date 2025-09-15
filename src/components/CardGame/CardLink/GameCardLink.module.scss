@@ -1,0 +1,21 @@
+.cardContainer {
+  position: relative;
+  max-width: fit-content;
+}
+.editLink {
+  padding: .5rem;
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.258);
+  z-index: 10;
+  border-radius: 1rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  & img{
+    width:16px;
+    aspect-ratio: 1/1;
+  }
+}
