@@ -1,17 +1,23 @@
 // vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { tanstackRouter } from '@tanstack/router-plugin/vite'
-
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
+import svgr from 'vite-plugin-svgr'
+import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    // Please make sure that '@tanstack/router-plugin' is passed before '@vitejs/plugin-react'
-    tanstackRouter({
+    svgr(),
+    TanStackRouterVite({
       target: 'react',
       autoCodeSplitting: true,
     }),
     react(),
     // ...,
   ],
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, 'src'),
+    },
+  },
 })
