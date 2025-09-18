@@ -4,7 +4,8 @@
 // })
 import { createFileRoute } from "@tanstack/react-router";
 // import '../styles/_base.scss'
-import App from "../App";
+// import App from "../App";
+import Landing from "../components/Landing/Landing";
 export const Route = createFileRoute("/")({
-  component: App,
+  component: Landing,
 });
