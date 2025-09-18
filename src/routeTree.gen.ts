@@ -12,8 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as CrearRouteImport } from './routes/crear'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as GamesGameIdRouteImport } from './routes/_games/$gameId'
-import { Route as GamesGameIdEditRouteImport } from './routes/_games/$gameId.edit'
+import { Route as GamesGameIdIndexRouteImport } from './routes/_games/$gameId/index'
+import { Route as GamesGameIdEditRouteImport } from './routes/_games/$gameId/edit'
 
 const FavoritosRoute = FavoritosRouteImport.update({
   id: '/favoritos',
@@ -30,58 +30,59 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GamesGameIdRoute = GamesGameIdRouteImport.update({
-  id: '/_games/$gameId',
-  path: '/$gameId',
+const GamesGameIdIndexRoute = GamesGameIdIndexRouteImport.update({
+  id: '/_games/$gameId/',
+  path: '/$gameId/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamesGameIdEditRoute = GamesGameIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => GamesGameIdRoute,
+  id: '/_games/$gameId/edit',
+  path: '/$gameId/edit',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/crear': typeof CrearRoute
   '/favoritos': typeof FavoritosRoute
-  '/$gameId': typeof GamesGameIdRouteWithChildren
   '/$gameId/edit': typeof GamesGameIdEditRoute
+  '/$gameId': typeof GamesGameIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/crear': typeof CrearRoute
   '/favoritos': typeof FavoritosRoute
-  '/$gameId': typeof GamesGameIdRouteWithChildren
   '/$gameId/edit': typeof GamesGameIdEditRoute
+  '/$gameId': typeof GamesGameIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/crear': typeof CrearRoute
   '/favoritos': typeof FavoritosRoute
-  '/_games/$gameId': typeof GamesGameIdRouteWithChildren
   '/_games/$gameId/edit': typeof GamesGameIdEditRoute
+  '/_games/$gameId/': typeof GamesGameIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/crear' | '/favoritos' | '/$gameId' | '/$gameId/edit'
+  fullPaths: '/' | '/crear' | '/favoritos' | '/$gameId/edit' | '/$gameId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/crear' | '/favoritos' | '/$gameId' | '/$gameId/edit'
+  to: '/' | '/crear' | '/favoritos' | '/$gameId/edit' | '/$gameId'
   id:
     | '__root__'
     | '/'
     | '/crear'
     | '/favoritos'
-    | '/_games/$gameId'
     | '/_games/$gameId/edit'
+    | '/_games/$gameId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CrearRoute: typeof CrearRoute
   FavoritosRoute: typeof FavoritosRoute
-  GamesGameIdRoute: typeof GamesGameIdRouteWithChildren
+  GamesGameIdEditRoute: typeof GamesGameIdEditRoute
+  GamesGameIdIndexRoute: typeof GamesGameIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -107,40 +108,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_games/$gameId': {
-      id: '/_games/$gameId'
+    '/_games/$gameId/': {
+      id: '/_games/$gameId/'
       path: '/$gameId'
       fullPath: '/$gameId'
-      preLoaderRoute: typeof GamesGameIdRouteImport
+      preLoaderRoute: typeof GamesGameIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_games/$gameId/edit': {
       id: '/_games/$gameId/edit'
-      path: '/edit'
+      path: '/$gameId/edit'
       fullPath: '/$gameId/edit'
       preLoaderRoute: typeof GamesGameIdEditRouteImport
-      parentRoute: typeof GamesGameIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface GamesGameIdRouteChildren {
-  GamesGameIdEditRoute: typeof GamesGameIdEditRoute
-}
-
-const GamesGameIdRouteChildren: GamesGameIdRouteChildren = {
-  GamesGameIdEditRoute: GamesGameIdEditRoute,
-}
-
-const GamesGameIdRouteWithChildren = GamesGameIdRoute._addFileChildren(
-  GamesGameIdRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CrearRoute: CrearRoute,
   FavoritosRoute: FavoritosRoute,
-  GamesGameIdRoute: GamesGameIdRouteWithChildren,
+  GamesGameIdEditRoute: GamesGameIdEditRoute,
+  GamesGameIdIndexRoute: GamesGameIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
