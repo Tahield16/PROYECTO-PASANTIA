@@ -21,3 +21,10 @@
     width:fit-content;
     gap:3rem;
 }
+@media (max-width:750px) {
+    .header{
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+}
