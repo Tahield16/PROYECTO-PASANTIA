@@ -1,0 +1,21 @@
+@use "../../styles/variables" as v;
+.landingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem; // espacio entre título, filtros, cards
+  min-height: 100vh;
+  padding: 2rem;
+}
+.gamesContainer {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+
+  // Máximo 4 columnas, pero responsive
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  // Asegura que no se estire raro en pantallas grandes
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+}
