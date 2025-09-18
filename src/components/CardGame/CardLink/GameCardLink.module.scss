@@ -1,3 +1,4 @@
+@use '../../../styles/variables' as v;
 .cardContainer {
   position: relative;
   max-width: fit-content;
@@ -17,5 +18,6 @@
   & img{
     width:16px;
     aspect-ratio: 1/1;
+    
   }
 }
