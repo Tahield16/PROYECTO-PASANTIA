@@ -4,13 +4,14 @@
   $font-size: 2rem,
   $bold: false,
   $border-size: 0px,
-  $border-type: solid
+  $border-type: solid,
+  $border-color:v.$accent-buttons
 ) {
   color: $color;
   font-weight: if($bold, bold, normal);
   font-size: $font-size;
   @if ($border-size>0) {
-    border-bottom: $border-size $color $border-type;
+    border-bottom: $border-size $border-color $border-type;
   }
 }
 

@@ -1,0 +1,21 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/variables' as v;
+$font-size-text:1.5rem;
+.title{
+    @include m.highlight($bold:true,$border-size:2px,$font-size:$font-size-text + .5rem);
+    max-width:fit-content;    
+}
+.text{
+    text-wrap:pretty;
+    font-size: $font-size-text;
+    font-family: v.$font-text;
+}
+.highlite{
+    @include m.highlight($font-size:$font-size-text,$bold:true);
+}   
+
+@media (max-width:750px) {
+    .text{
+        text-align: center;
+    }
+}
