@@ -7,7 +7,7 @@ export const GameCardLink = (game: Game) => {
   return (
     <article className={styles.cardContainer}>
       <Link to="/$gameId" params={{ gameId: String(_id) }}>
-        <Card {...game} key={_id} />
+        <Card _id={_id} name={game.name} img={game.img} description={game.description} favorite={game.favorite} rating={game.rating} key={_id} />
       </Link>
       <Link
         to="/$gameId/edit"
