@@ -1,0 +1,14 @@
+@use "../../styles/_mixins" as m;
+@use "../../styles/_variables" as v;
+.filtersContainer {
+  //     display:grid;
+  //     grid-template-rows:1fr;
+  //     grid-template-columns:calc()
+  //     gap:1rem;
+  // }
+  display: grid;
+  grid-auto-flow: column; // las columnas se crean automáticamente en fila
+  grid-auto-columns: min-content; // cada columna ocupa solo lo que necesita
+  gap: 1rem; // espacio entre columnas
+  align-items: start; // opcional, alinea los items al inicio vertical
+}

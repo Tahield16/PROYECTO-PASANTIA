@@ -1,0 +1,42 @@
+@use "../../../styles/_mixins" as m;
+@use "../../../styles/_variables" as v;
+.darkTheme {
+  @include m.filter-box-dark;
+}
+.lightTheme {
+  @include m.filter-box-light;
+}
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; // centra el texto
+
+  min-width: 120px; // asegura espacio suficiente para el más largo
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  white-space: nowrap; // evita que el texto baje de línea
+}
+.options {
+  position: absolute;
+  padding: 1rem;
+  display: grid;
+  gap: .5rem;
+  max-height: 250px;
+  overflow-y: scroll;
+  z-index: 100;
+  border-radius: 1rem;
+  width: fit-content;
+}
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: brightness(0.95);
+  }
+}

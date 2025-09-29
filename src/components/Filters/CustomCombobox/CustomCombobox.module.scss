@@ -1,0 +1,63 @@
+@use "../../../styles/_mixins" as m;
+@use "../../../styles/_variables" as v;
+
+.darkTheme {
+  @include m.filter-box-dark;
+}
+.lightTheme {
+  @include m.filter-box-light;
+}
+
+.input {
+  flex-direction: column;
+  position: relative;
+  padding: 0.5rem;
+  min-width: 120px; // asegura espacio suficiente para el más largo
+  width: fit-content;
+  color:v.$accent-primary;
+}
+.optionsWrapper {
+  position: absolute;
+  display: grid;
+  gap: 1rem;
+  width: fit-content;
+  border-radius: 0.25rem;
+  top: 3rem;
+  z-index: 10000;
+  display: block;
+  padding: 0.5rem;
+}
+
+.option {
+  width: 100%;
+  z-index: 100;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.relative {
+  position: relative;
+}
+.inputWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.customPlaceholder {
+  position: absolute;
+  top: 50%;
+  left: 1rem; // separa del borde
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none; // para que no bloquee el input
+  font-size: 0.875rem;
+  
+}
+
+.logo {
+  aspect-ratio: 1/1;
+  width: 16px;
+  margin-right: 0.5rem;
+}
