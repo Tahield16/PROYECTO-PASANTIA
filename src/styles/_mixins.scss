@@ -42,3 +42,25 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
 }
+@mixin filter-box-dark () {
+  background: v.$color-surface;
+  color:v.$accent-primary;
+  padding:   1rem;
+  border-radius: 0.75rem;
+  border-color: v.$accent-primary;
+  font-size: 0.875rem;
+  display:flex;
+  align-items: center;
+  cursor: pointer;
+}
+@mixin filter-box-light () {
+  background: v.$accent-secondary;
+  color:v.$text-primary;
+  padding:  1rem;
+  border-radius: 0.75rem;
+  border-color: v.$accent-primary;
+  font-size: 0.875rem;
+  display:flex;
+  align-items: center;
+  cursor: pointer;
+}
