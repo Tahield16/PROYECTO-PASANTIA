@@ -51,7 +51,7 @@ export const initialGames: Games =[
     description: "Quinto juego de ejemplo",
     release: "2023-08-20",
     rating: 4.7,
-    img: "https://placehold.co/400",
+    img: undefined,
     source: "API",
     favorite:true,
     genres: ["Simulation", "Strategy"],

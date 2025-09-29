@@ -5,7 +5,7 @@
  description:string,
  release:string,
  rating:number,
- img:string,
+ img:string | undefined,
  genres:string[],
  favorite:boolean
  source:"API"| "DATABASE"
