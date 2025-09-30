@@ -2,7 +2,7 @@ import type { Game } from "../../../types/gameType";
 import styles from "./card.module.scss";
 import placeholderImage from '/assets/videogames-placeholder.png'
 type GameCardProps =Partial<Game>
-export const Card = ({ _id, name, img, rating, genres,description,favorite }: GameCardProps) => {
+export const Card = ({ _id, name, img, rating, genres,description,favorite,release }: GameCardProps) => {
   const favImgRoute=favorite?'/assets/Activated-favs.svg':'/assets/Deactivated-favs.svg';
   const imgRoute=img?img:placeholderImage
   return (
@@ -12,16 +12,16 @@ export const Card = ({ _id, name, img, rating, genres,description,favorite }: Ga
       <div className={styles.cardContent}>
         <div className={styles.favContainer}>
           <p className={styles.cardTitle}>{name}</p>
-          <img src={favImgRoute} alt="Juego favorito desactivado" />
+          {favorite && <img src={favImgRoute} alt="Juego favorito desactivado" />}
         </div>
 
-        <p className={styles.rating}>
-          <span className={styles.spnRate}>{rating}</span>/10{" "}
+       {rating &&  <p className={styles.rating}>
+          <span className={styles.spnRate}>{rating}</span>/10
           <img
             src="/assets/Star-icon.svg"
             alt="Star Icon represeting quantity of stars in the game's rating"
           />
-        </p>
+        </p>}
         <div className={styles.genresContainer}>
           {genres?.map((genre) => (
             <div className={styles.genreWrapper} key={`${_id}-${genre}`}>
@@ -29,7 +29,8 @@ export const Card = ({ _id, name, img, rating, genres,description,favorite }: Ga
             </div>
           ))}
         </div>
-        <p className={styles.description}>{description}</p>
+        {release && <p>Fecha de salida: <span className={styles.releaseDate}>{release}</span></p>}
+        {description && <p className={styles.description}>{description}</p>}
       </div>
     </div>
   );
