@@ -2,8 +2,8 @@
 @use '../../../styles/mixins' as m;
 .cardContainer{
     min-width:150px;
-    max-width:fit-content;
-    width:250px;
+    // max-width:fit-content;
+    // width:250px;
     background-color:v.$color-surface;
     display:flex;
     flex-direction:column;
@@ -54,4 +54,8 @@
 }
 .spnRate{
   @include m.highlight($font-size:1rem);
+}
+.developersContainer{
+    display:inline-flex;
+    
 }
