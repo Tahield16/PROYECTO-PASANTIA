@@ -7,7 +7,8 @@
  rating:number,
  img:string | undefined,
  genres:string[],
- favorite:boolean
- source:"API"| "DATABASE"
+ favorite:boolean,
+ source:"API"| "DATABASE",
+ developedBy:string[]
 }
 type Games=Game[]
