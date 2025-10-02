@@ -1,14 +1,21 @@
-
- export interface Game{
- _id:number,
- name:string,
- description:string,
- release:string,
- rating:number,
- img:string | undefined,
- genres:string[],
- favorite:boolean,
- source:"API"| "DATABASE",
- developedBy:string[]
+import { Genres } from "./genreType";
+import { Tag } from "./tag";
+import { Requirements } from "./requirements";
+import { Platforms } from "./platform";
+export interface Game { 
+  _id: number;                           // id del juego
+  name: string;                          // nombre
+  tba: boolean;                          // to be announced
+  description: string;                   // descripción larga (HTML a veces)
+  release: string;                       // released (fecha lanzamiento)
+  rating: number;                        // promedio de rating
+  backgroundImage: string | undefined;   // background_image
+  genres: Genres;                       // relación con Genre tipado abajo
+  favorite: boolean;                     // flag manual
+  source: "API" | "DATABASE";            // de dónde viene
+  developedBy: string[];                 // developers
+  platforms: Platform[];                 // plataformas disponibles
+  requirements?: Requirements;           // requisitos mínimos/recomendados
+  tags?: Tag[];                          // opcional: solo si querés usar
 }
 type Games=Game[]
