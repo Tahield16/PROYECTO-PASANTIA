@@ -5,7 +5,7 @@
   $bold: false,
   $border-size: 0px,
   $border-type: solid,
-  $border-color:v.$accent-buttons
+  $border-color: v.$accent-buttons
 ) {
   color: $color;
   font-weight: if($bold, bold, normal);
@@ -39,28 +39,38 @@
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 }
-@mixin filter-box-dark () {
+@mixin filter-box-dark() {
   background: v.$color-surface;
-  color:v.$accent-primary;
-  padding:   1rem;
+  color: v.$accent-primary;
+  padding: 1rem;
   border-radius: 0.75rem;
   border-color: v.$accent-primary;
   font-size: 0.875rem;
-  display:flex;
+  display: flex;
   align-items: center;
   cursor: pointer;
 }
-@mixin filter-box-light () {
+@mixin filter-box-light() {
   background: v.$accent-secondary;
-  color:v.$text-primary;
-  padding:  1rem;
+  color: v.$text-primary;
+  padding: 1rem;
   border-radius: 0.75rem;
   border-color: v.$accent-primary;
   font-size: 0.875rem;
-  display:flex;
+  display: flex;
   align-items: center;
   cursor: pointer;
+}
+@mixin card-container-style {
+  min-width: 150px;
+  background-color: v.$color-surface;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  border-radius: 2rem 2rem 0 0;
+  overflow: hidden;
 }
