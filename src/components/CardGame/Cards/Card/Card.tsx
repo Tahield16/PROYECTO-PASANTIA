@@ -1,11 +1,11 @@
-import type { Game } from "../../../types/gameType";
+import type { Game } from "../../../../types/gameType";
 import styles from "./card.module.scss";
 import placeholderImage from "/assets/videogames-placeholder.png";
 type GameCardProps = Partial<Game>;
 export const Card = ({
   _id,
   name,
-  img,
+  backgroundImage,
   rating,
   genres,
   description,
@@ -16,19 +16,25 @@ export const Card = ({
   const favImgRoute = favorite
     ? "/assets/Activated-favs.svg"
     : "/assets/Deactivated-favs.svg";
-  const imgRoute = img ? img : placeholderImage;
+  const imgRoute = backgroundImage ? backgroundImage : placeholderImage;
   return (
     <div className={styles.cardContainer}>
-      <img
-        className={styles.gameLogo}
-        src={imgRoute}
-        alt={`Image of ${name}`}
-      />
+      <div className="logoContainer">
+        <img
+          className={styles.gameLogo}
+          src={imgRoute}
+          alt={`Image of ${name}`}
+        />
+      </div>
       <div className={styles.cardContent}>
         <div className={styles.favContainer}>
           <p className={styles.cardTitle}>{name}</p>
-          {favorite && (
-            <img src={favImgRoute} alt="Juego favorito desactivado" />
+          {favorite !== undefined && (
+            <img
+              className={styles.favImg}
+              src={favImgRoute}
+              alt={favorite ? "Juego favorito" : "Juego no favorito"}
+            />
           )}
         </div>
 
@@ -44,14 +50,14 @@ export const Card = ({
         <div className={styles.genresContainer}>
           {genres?.map((genre) => (
             <div className={styles.genreWrapper} key={`${_id}-${genre}`}>
-              <span>{genre}</span>
+              <span>{genre.slug}</span>
             </div>
           ))}
         </div>
         {developedBy && (
           <div className={styles.developersContainer}>
             <p>
-              Desarrollado por: {" "}
+              Desarrollado por:{" "}
               {developedBy?.map((developer, index) => (
                 <span key={index} className={styles.developer}>
                   {developer}
@@ -63,7 +69,7 @@ export const Card = ({
         )}
         {release && (
           <p>
-            Fecha de salida: 
+            Fecha de salida:{" "}
             <span className={styles.releaseDate}>{release}</span>
           </p>
         )}
@@ -72,3 +78,4 @@ export const Card = ({
     </div>
   );
 };
+
