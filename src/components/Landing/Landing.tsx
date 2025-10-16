@@ -9,7 +9,7 @@ const Landing=()=>{
   return (
     <main className={styles.landingContainer}>
         <TitleTextContainer title="Biblioteca" text="Encuentra, monitorea y consagra tus juegos favoritos en una" highlited="biblioteca sagrada" />
-        <FiltersContainer></FiltersContainer>
+        <FiltersContainer />
       <section className={styles.gamesContainer}>
         {games.map((game) => (
           <GameCardLink key={game._id} {...game} />
