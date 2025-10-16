@@ -1,0 +1,140 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+img {
+  display: block;
+  max-width: 100%;
+}
+.textHighlight {
+  @include m.highlight($font-size: 1rem, $color: v.$accent-primary);
+  white-space: nowrap;
+}
+.relaseHighlight {
+  color: v.$accent-primary;
+}
+.detailsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+.centeredContent {
+  width: 80%;
+  display: grid;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.TitleDescriptionContainer {
+  width: 100%;
+  text-align: left;
+}
+
+.galleryContainer {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+$mainImgMaxWidth: 700px;
+.mainImg {
+  flex: 2; /* ocupa el doble de espacio que las miniaturas */
+  aspect-ratio: 16 / 9; /* mantiene proporción visual */
+  border-radius: 1rem;
+  object-fit: cover;
+  max-width: $mainImgMaxWidth;
+}
+
+.thumbnailsContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.screenshot {
+  max-width: 450px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+.descriptionWrapper {
+  width: 100%;
+  display: grid;
+  gap: 2rem;
+}
+
+.ratingGameContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  width: 100%;
+}
+
+.platformsContainer {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+.platformWrapper {
+  @include m.badge-style(v.$accent-dark, v.$text-primary);
+  display: flex;
+  width: 130px;
+  & .platformLogo {
+    width: 32px;
+  }
+}
+// .gameDescription {
+//   //max-width: 100ch;
+// }
+.featuresContainer {
+  margin-top:2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap:5rem;
+  .featureItem {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 3rem;
+    width:500px;
+    // padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+.genresContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 300px;
+}
+.genreWrapper {
+  @include m.badge-style(v.$accent-secondary, v.$text-primary);
+}
+.tagsContainer {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.requirementsContainer{
+  display:grid;
+  align-items:start;
+  & .requirement{
+    max-width: 70ch;
+    text-wrap: balance;
+  }
+}
