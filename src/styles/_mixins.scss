@@ -36,6 +36,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: fit-content;
 
   &:hover {
     transform: scale(1.05);

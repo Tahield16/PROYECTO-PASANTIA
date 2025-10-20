@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-$bg-color: #1E1927;
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+$bg-color: #1e1927;
 $color-surface: #1b173f;
 $accent-primary: #e59f31;
 $accent-secondary: #5f8099;
 $accent-buttons: #e9bb80;
 $accent-danger: #d64545;
+$accent-dark: #000000;
 $color-field-bg: #1b173fb3;
+
 $text-primary: #e8d6cf;
 $text-label: #d1d1d1b3;
 $font-title: "Raleway";
@@ -14,4 +16,3 @@ $font-text: "Titillium Web";
 $font-size-base: 16px;
 $font-size-heading: 2rem;
 $font-size-subheading: 1.25rem;
-
