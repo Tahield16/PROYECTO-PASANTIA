@@ -7,8 +7,8 @@ import type {
   Option as OptionList,
   OptionsArray as OptionsArrayList,
 } from "../../types/listboxOptionType";
-import { CustomCombobox } from "./CustomCombobox/CustomCombobox";
-import { CustomListbox } from "./CustomListbox/CustomListbox";
+import { CustomCombobox } from "../CustomCombobox/CustomCombobox";
+import { CustomListbox } from "../CustomListbox/CustomListbox";
 import styles from "./FiltersContainer.module.scss";
 // const sourceOptions:Options[]=[{label:"Todos",:"ALL"},{label:"API",value:"API"},{label:"Usuario",value:"DATABASE"}];
 // const {games}=useGamesStore();
@@ -98,6 +98,8 @@ export const FiltersContainer = () => {
         value={orderByValue}
         onChange={setOrderByValue}
         options={OrderByOptions}
+        isMultiple={false}
+
         className="dark"
         placeholder="Ordenar por"
       />
@@ -120,6 +122,7 @@ export const FiltersContainer = () => {
         value={source}
         onChange={setSource}
         options={filterByOrigin}
+        isMultiple={false}
         className="dark"
         placeholder="Filtrar por origen"
       />
