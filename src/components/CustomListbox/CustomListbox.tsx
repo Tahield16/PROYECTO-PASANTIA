@@ -6,30 +6,41 @@ import {
 } from "@headlessui/react";
 import styles from "./CustomListbox.module.scss";
 import type { Option, OptionsArray } from "../../types/listboxOptionType";
-interface CustomSelectProps {
-  value: Option | null;
-  onChange: (value: Option | null) => void;
+
+interface BaseProps {
   options: OptionsArray;
-  isMultiple: boolean;
   placeholder?: string;
   className?: "dark" | "light";
 }
-export const CustomListbox = ({
-  value,
-  onChange,
-  options,
-  isMultiple,
-  placeholder,
-  className,
-}: CustomSelectProps) => {
+
+interface SingleProps extends BaseProps {
+  isMultiple?: false;
+  value: Option | null;
+  onChange: (value: Option | null) => void;
+}
+
+interface MultipleProps extends BaseProps {
+  isMultiple: true;
+  value: Option[] | null;
+  onChange: (value: Option[] | null) => void;
+}
+
+type CustomSelectProps = SingleProps | MultipleProps;
+
+export const CustomListbox = (props: CustomSelectProps) => {
+  const { options, placeholder, className } = props;
   const theme = className == "dark" ? styles.darkTheme : styles.lightTheme;
-  if (isMultiple) {
+
+  if (props.isMultiple) {
+    const { value, onChange } = props as MultipleProps;
+    const valueArray = value ?? [];
+
     return (
-      <Listbox value={value} onChange={onChange} multiple>
+      <Listbox value={valueArray} onChange={onChange} multiple>
         <div>
           {/* {placeholder && <p className={styles.title}>{placeholder}</p>} */}
           <ListboxButton className={`${styles.button} ${theme}`}>
-            {value ? value.label : placeholder}
+            {valueArray && valueArray.length ? valueArray.map((v) => v.label).join(", ") : placeholder}
           </ListboxButton>
           <ListboxOptions className={`${styles.options} ${theme}`}>
             {options.map(({ label, optionItems }, index) => (
@@ -57,6 +68,9 @@ export const CustomListbox = ({
       </Listbox>
     );
   }
+
+  const { value, onChange } = props as SingleProps;
+
   return (
     <Listbox value={value} onChange={onChange}>
       <div>
