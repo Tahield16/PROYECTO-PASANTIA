@@ -4,7 +4,7 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
-import type { OptionsArray, Option } from "../../../types/comboboxOptionsType";
+import type { OptionsArray, Option } from "../../types/comboboxOptionsType";
 import { useState } from "react";
 import styles from "./CustomCombobox.module.scss";
 
