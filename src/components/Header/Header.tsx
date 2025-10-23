@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import styles from "./header.module.scss";
-
+import logoDVT from '/assets/logoDVT.svg'
 
 export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.logoContainer}>
-        <img src='assets/logoDVT.svg' alt="Logo de Devoted To Videogames" />
+        <img src={logoDVT} alt="Logo de Devoted To Videogames" />
         <h1 className={styles.title}>Devoted To Videogames</h1>
       </div>
    
