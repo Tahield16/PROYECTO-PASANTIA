@@ -5,10 +5,14 @@ import {
   ListboxOption,
 } from "@headlessui/react";
 import styles from "./CustomListbox.module.scss";
-import type { Option, OptionsArray } from "../../types/listboxOptionType";
+import type { Option, OptionGroup, OptionsArray } from "../../types/listboxOptionType";
+import type { Genres } from "../../types/genreType";
+
+// 🔹 Nuevo tipo que admite un solo grupo o un array
+type OptionInput = OptionGroup | OptionsArray | Genres;
 
 interface BaseProps {
-  options: OptionsArray;
+  options: OptionInput;
   placeholder?: string;
   className?: "dark" | "light";
 }
@@ -21,33 +25,38 @@ interface SingleProps extends BaseProps {
 
 interface MultipleProps extends BaseProps {
   isMultiple: true;
-  value: Option[] | null;
-  onChange: (value: Option[] | null) => void;
+  value: Option[];
+  onChange: (value: Option[]) => void;
 }
 
 type CustomSelectProps = SingleProps | MultipleProps;
 
 export const CustomListbox = (props: CustomSelectProps) => {
   const { options, placeholder, className } = props;
-  const theme = className == "dark" ? styles.darkTheme : styles.lightTheme;
+  const theme = className === "dark" ? styles.darkTheme : styles.lightTheme;
+
+  // 🔹 Normalizamos: si es un solo grupo, lo convertimos en array
+  const normalizedOptions = Array.isArray(options) ? options : [options];
 
   if (props.isMultiple) {
-    const { value, onChange } = props as MultipleProps;
+    const { value, onChange } = props;
     const valueArray = value ?? [];
 
     return (
       <Listbox value={valueArray} onChange={onChange} multiple>
         <div>
-          {/* {placeholder && <p className={styles.title}>{placeholder}</p>} */}
           <ListboxButton className={`${styles.button} ${theme}`}>
-            {valueArray && valueArray.length ? valueArray.map((v) => v.label).join(", ") : placeholder}
+            {valueArray.length > 0
+              ? valueArray.map((v) => v.label).join(", ")
+              : placeholder}
           </ListboxButton>
+
           <ListboxOptions className={`${styles.options} ${theme}`}>
-            {options.map(({ label, optionItems }, index) => (
+            {normalizedOptions.map(({ label, optionItems }, index) => (
               <div key={index}>
                 {label && (
                   <>
-                    <p className="title">{label}</p>
+                    <p className={styles.title}>{label}</p>
                     <hr />
                   </>
                 )}
@@ -69,17 +78,17 @@ export const CustomListbox = (props: CustomSelectProps) => {
     );
   }
 
-  const { value, onChange } = props as SingleProps;
+  const { value, onChange } = props;
 
   return (
     <Listbox value={value} onChange={onChange}>
       <div>
-        {/* {placeholder && <p className={styles.title}>{placeholder}</p>} */}
         <ListboxButton className={`${styles.button} ${theme}`}>
           {value ? value.label : placeholder}
         </ListboxButton>
+
         <ListboxOptions className={`${styles.options} ${theme}`}>
-          {options.map(({ label, optionItems }, index) => (
+          {normalizedOptions.map(({ label, optionItems }, index) => (
             <div key={index}>
               {label && (
                 <>

@@ -6,16 +6,20 @@
 .lightTheme {
   @include m.filter-box-light;
 }
+.title{ 
+  @include m.highlight($bold:true);
+}
 .button {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center; // centra el texto
-
+  flex-wrap: wrap;
+  max-width: 750px;
   min-width: 120px; // asegura espacio suficiente para el más largo
   width: fit-content;
-  padding: 0.5rem 1rem;
-  white-space: nowrap; // evita que el texto baje de línea
+  padding: 1rem;
+  white-space: normal; // evita que el texto baje de línea
 }
 .options {
   position: absolute;
