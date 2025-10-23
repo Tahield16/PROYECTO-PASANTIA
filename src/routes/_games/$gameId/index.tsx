@@ -3,6 +3,7 @@ import { GameDetails } from "../../../components/GameDetails/GameDetails";
 type GameParams = {
   gameId: number;
 };
+//useParams
 export const Route = createFileRoute("/_games/$gameId/")({
   component: RouteComponent,
  
