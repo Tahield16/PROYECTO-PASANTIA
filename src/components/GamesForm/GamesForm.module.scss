@@ -1,0 +1,89 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/variables' as v;
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: v.$color-field-bg; /* fondo oscuro elegante */
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  max-width: 500px;
+  color: v.$text-primary;
+  font-family:v.$font-text;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+
+.inputs{
+  background-color: v.$color-surface;
+  border: 1px solid #3a3a3a;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s ease, background-color 0.2s ease;
+
+  &:focus {
+    border-color: #5d9cec;
+    background-color: #333;
+  }
+}
+.inputsImage{
+background-color: v.$color-field-bg;
+}
+textarea {
+  resize: none;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: v.$accent-secondary;
+  cursor: pointer;
+}
+
+button {
+  background-color: v.$accent-secondary;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  align-self: center;
+
+  &:hover {
+    background-color: #4b8dd9;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .formContainer {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 0.9rem;
+  }
+}

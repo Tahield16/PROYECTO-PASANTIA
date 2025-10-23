@@ -21,28 +21,21 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
     selectedGame?.backgroundImage
   );
   const [thumbnails, setThumbnails] = useState(
-    selectedGame?.shortScreenshots?.slice(0,maxThumbnails).map((s) => s.image) ?? []
+    selectedGame?.shortScreenshots
+      ?.slice(0, maxThumbnails)
+      .filter((s) => s.image !== mainImgSource) ?? []
   );
-  // const handleClickImg = (screenshotSrc: string) => {
-  //   setThumbnails((prev) => {
-  //     const newThumbnails = prev.map((img) =>
-  //       img == screenshotSrc ? mainImgSource : img
-  //     );
-  //     return newThumbnails;
-  //   });
+
+  // const handleClickImg = (screenshotImg: string) => {
+  //   if (!mainImgSource || mainImgSource === screenshotImg) return;
+  //   setThumbnails((prev) => (
+  //     const newThumbs = prev.map((screen) => (
+  //       const newSource=screen.image==screenshotImg ? mainImgSource:screen.image
+  //     ));
+  //   ));
+  //   // Intercambia la imagen principal con la seleccionada
+  //   setMainImgSource(screenshotImg);
   // };
-  const handleClickImg = (screenshotImg: string) => {
-    if (!mainImgSource || mainImgSource === screenshotImg) return;
-    // Intercambia la imagen principal con la seleccionada
-    setThumbnails((prev) => {
-      const newThumbs = prev.map((img) =>
-        img == screenshotImg ? mainImgSource : img
-      );
-      console.log(newThumbs);
-      return newThumbs;
-    });
-    setMainImgSource(screenshotImg);
-  };
   return (
     <main className={styles.detailsContainer}>
       <div className={styles.centeredContent}>
@@ -70,8 +63,9 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
             {thumbnails.map((screenshot, i) => (
               <div key={i}>
                 <img
-                  onClick={() => handleClickImg(screenshot)}
-                  src={screenshot}
+                // () => handleClickImg(screenshot.image)
+                  onClick={()=>{}}
+                  src={screenshot.image}
                   alt={`${selectedGame?.name}_gameplay_ss`}
                   className={styles.screenshot}
                 />
