@@ -1,15 +1,14 @@
 import {
   Listbox,
   ListboxButton,
-  ListboxOptions,
   ListboxOption,
+  ListboxOptions,
 } from "@headlessui/react";
-import styles from "./CustomListbox.module.scss";
 import type { Option, OptionGroup, OptionsArray } from "../../types/listboxOptionType";
-import type { Genres } from "../../types/genreType";
+import styles from "./CustomListbox.module.scss";
 
 // 🔹 Nuevo tipo que admite un solo grupo o un array
-type OptionInput = OptionGroup | OptionsArray | Genres;
+type OptionInput = OptionGroup | OptionsArray;
 
 interface BaseProps {
   options: OptionInput;
@@ -40,6 +39,7 @@ export const CustomListbox = (props: CustomSelectProps) => {
 
   if (props.isMultiple) {
     const { value, onChange } = props;
+    // normalizar value para que HeadlessUI reciba siempre un array
     const valueArray = value ?? [];
 
     return (
@@ -51,7 +51,7 @@ export const CustomListbox = (props: CustomSelectProps) => {
               : placeholder}
           </ListboxButton>
 
-          <ListboxOptions className={`${styles.options} ${theme}`}>
+          <ListboxOptions className={`${styles.options} ${theme}`} anchor="bottom start">
             {normalizedOptions.map(({ label, optionItems }, index) => (
               <div key={index}>
                 {label && (

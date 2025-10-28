@@ -1,0 +1,37 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+.createGameContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  // Fondo y transición opcional (ajustá a tu tema)
+  background-color: v.$color-field-bg;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  // Para pantallas medianas o chicas, apila los elementos
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  // Estilos internos (opcionales)
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  // Contenedor de la card
+  > div:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}

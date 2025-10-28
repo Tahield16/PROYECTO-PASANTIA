@@ -1,17 +1,18 @@
-@use '../../../styles/variables' as v;
-@use '../../../styles/_mixins' as m;
-.cardContainer{
-   @include m.card-container-style;
-//    max-width:800px;
-//    display:grid;
+@use "../../../styles/variables" as v;
+@use "../../../styles/_mixins" as m;
+.cardContainer {
+  @include m.card-container-style;
+  max-width: 800px;
+  display:grid;
+  gap:2rem;
+  
 }
-.favContainer{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap:1rem;
-   
+.favContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 .favImg {
   width: 32px;
@@ -19,51 +20,62 @@
   z-index: 2;
 }
 
-.gameLogo{
-    display:block;
-    width:100%;
-    border-radius: 2rem 2rem 0 0;
-    max-height:350px;
-    object-fit:cover;
+.gameLogo {
+  display: block;
+  width: 100%;
+  border-radius: 2rem 2rem 0 0;
+  max-height: 350px;
+  object-fit: cover;
 }
-.cardContent{
-    padding:1rem;
-    min-width:100%;
-    display:grid;
-    gap:.5em;
+.cardContent {
+  padding: 1rem;
+  min-width: 100%;
+  display: grid;
+  gap: 0.5em;
 }
-.cardTitle{
-    @include m.highlight($bold:true,$color:v.$accent-primary);
-    
+.cardTitle {
+  @include m.highlight($bold: true, $color: v.$accent-primary);
 }
-.genresContainer{
-    display:flex;
-    flex-wrap: wrap;
-    gap:1em;
-    width:fit-content;
-
+.genresContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  width: fit-content;
 }
-.genreWrapper{
-      @include m.badge-style(v.$accent-secondary, v.$text-primary);
+.genreWrapper {
+  @include m.badge-style(v.$accent-secondary, v.$text-primary);
 }
-.rating{
-    font-size:v.$font-size-base;
-    font-family: 'Titillium Web';
+.rating {
+  font-size: v.$font-size-base;
+  font-family: "Titillium Web";
 }
 .description {
-  max-width: 40ch;        
-  max-height: 3em;       
-  overflow: hidden;
-  text-overflow: ellipsis; 
-  color:v.$text-primary;
+  max-width: 40ch;
+  display:flex;
+  align-items: center;
+//   max-height: 3em;
+//   overflow: hidden;
+  text-overflow: wrap;
+  color: v.$text-primary;
 }
-.spnRate{
-  @include m.highlight($font-size:1rem);
+.spnRate {
+  @include m.highlight($font-size: 1rem);
 }
-.developersContainer{
-    display:inline-flex;
-    
+.developersContainer {
+  display: inline-flex;
+  gap:.5em;
+  flex-wrap: wrap;
+  text-wrap:wrap;
 }
-.developer{
-       @include m.highlight($font-size:1rem,$bold:false);
+.developer {
+  @include m.highlight($font-size: 1rem, $bold: false);
+}
+.screenshotsContainer{
+  display:grid;
+  max-width:100%;
+  gap:1em;
+  & img{
+    max-width:540px;
+    object-fit: cover;
+  }
 }

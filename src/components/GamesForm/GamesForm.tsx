@@ -1,340 +1,354 @@
+import { useEffect, useState } from "react";
 import { CustomListbox } from "../CustomListbox/CustomListbox";
-import { useState, type MouseEvent } from "react";
-import styles from "./GamesForm.module.scss";
-import type { Option, OptionsArray } from "../../types/listboxOptionType";
 import type { Game } from "../../types/gameType";
-interface GamesFormType {
-  selectedGame?: Partial<Game>;
-  setSelectedGame: (g: Game) => void;
-}
-export const GamesForm = ({ selectedGame, setSelectedGame }: GamesFormType) => {
-  const handleChange = (field: keyof Partial<Game>, value: any) => {
-    setSelectedGame({
-      ...selectedGame,
-      [field]: value,
-    } as Game);
+import type { Option, OptionGroup } from "../../types/listboxOptionType";
+import styles from "./GamesForm.module.scss";
+
+type GamesFormProps = {
+  selectedGame: Partial<Game> | undefined;
+  setSelectedGame: (game: Partial<Game>) => void;
+  allGenres?: OptionGroup[];
+  allPlatforms?: OptionGroup[];
+  allDevelopers?: OptionGroup[];
+  allPublishers?: OptionGroup[];
+  allStores?: OptionGroup[];
+  allTags?: OptionGroup[];
+};
+const mockGenres: OptionGroup[] = [
+  {
+    label: "Géneros",
+    optionItems: [
+      { label: "Acción", value: "accion" },
+      { label: "Aventura", value: "aventura" },
+      { label: "Estrategia", value: "estrategia" },
+    ],
+  },
+];
+
+const mockPlatforms: OptionGroup[] = [
+  {
+    label: "Plataformas",
+    optionItems: [
+      { label: "PC", value: "pc" },
+      { label: "PlayStation", value: "playstation" },
+      { label: "Xbox", value: "xbox" },
+    ],
+  },
+];
+
+const mockDevelopers: OptionGroup[] = [
+  {
+    label: "Desarrolladores",
+    optionItems: [
+      { label: "Valve", value: "valve" },
+      { label: "Rockstar", value: "rockstar" },
+    ],
+  },
+];
+
+const mockPublishers: OptionGroup[] = [
+  {
+    label: "Publicadores",
+    optionItems: [
+      { label: "EA", value: "ea" },
+      { label: "Ubisoft", value: "ubisoft" },
+    ],
+  },
+];
+
+const mockStores: OptionGroup[] = [
+  {
+    label: "Tiendas",
+    optionItems: [
+      { label: "Steam", value: "steam" },
+      { label: "Epic Games", value: "epic" },
+    ],
+  },
+];
+
+const mockTags: OptionGroup[] = [
+  {
+    label: "Tags",
+    optionItems: [
+      { label: "Multiplayer", value: "multiplayer" },
+      { label: "Indie", value: "indie" },
+    ],
+  },
+];
+const mockSource: OptionGroup[] = [
+  {
+    label: "Origen",
+    optionItems: [
+      { label: "API", value: "API" },
+      { label: "DATABASE", value: "DATABASE" },
+    ],
+  },
+];
+export const GamesForm = ({
+  selectedGame,
+  setSelectedGame,
+  allGenres = mockGenres,
+  allPlatforms = mockPlatforms,
+  allDevelopers = mockDevelopers,
+  allPublishers = mockPublishers,
+  allStores = mockStores,
+  allTags = mockTags,
+}: GamesFormProps) => {
+  const [formData, setFormData] = useState<Partial<Game>>(selectedGame || {});
+
+  useEffect(() => {
+    setFormData(selectedGame || {});
+  }, [selectedGame]);
+
+  const handleChange = (field: keyof Game, value: any) => {
+    // Si el valor es un array (por ejemplo, plataformas, géneros, tags, etc.)
+    const cleanedValue = Array.isArray(value)
+      ? value.filter((v) => v && (v.slug || v.name || v.label))
+      : value;
+
+    const updated = { ...formData, [field]: cleanedValue };
+    setFormData(updated);
+    setSelectedGame(updated);
   };
-  const [selectedDevelopers, setSelectedDevelopers] = useState<Option[]>([]);
-  const [selectedGenres, setSelectedGenres] = useState<Option[]>([]);
-  const [selectedPlatforms, setSelectedPlatforms] = useState<Option[]>([]);
-  const [selectedPublishers, setSelectedPublishers] = useState<Option[]>([]);
-  const [selectedTags, setSelectedTags] = useState<Option[]>([]);
-  // Función helper para actualizar cualquier campo de selectedGame
 
-  const allDevelopers: OptionsArray = [
-    {
-      label: "Desarrolladores",
-      optionItems: [
-        { label: "Team Cherry", value: "Team Cherry" },
-        { label: "From Software", value: "From Software" },
-      ],
-    },
-  ];
-
-  const allGenres: OptionsArray = [
-    {
-      label: "Géneros",
-      optionItems: [
-        { label: "Acción", value: "Acción" },
-        { label: "Aventura", value: "Aventura" },
-        { label: "RPG", value: "RPG" },
-      ],
-    },
-  ];
-
-  const allPlatforms: OptionsArray = [
-    {
-      label: "Plataformas",
-      optionItems: [
-        { label: "PC", value: "PC" },
-        { label: "PlayStation 5", value: "PlayStation 5" },
-        { label: "Xbox Series X", value: "Xbox Series X" },
-        { label: "Nintendo Switch", value: "Nintendo Switch" },
-      ],
-    },
-  ];
-
-  const allPublishers: OptionsArray = [
-    {
-      label: "Publishers",
-      optionItems: [
-        { label: "Sony", value: "Sony" },
-        { label: "Nintendo", value: "Nintendo" },
-        { label: "Microsoft", value: "Microsoft" },
-      ],
-    },
-  ];
-
-  const allTags: OptionsArray = [
-    {
-      label: "Etiquetas",
-      optionItems: [
-        { label: "Indie", value: "Indie" },
-        { label: "Soulslike", value: "Soulslike" },
-        { label: "Pixel Art", value: "Pixel Art" },
-      ],
-    },
-  ];
-
-  const [imageMode, setImageMode] = useState<"file" | "url">("file");
+  const normalizeOptionsToSlugs = (options: Option[]) =>
+    options?.map((opt) => ({
+      id: Number(opt.value),
+      name: opt.label,
+      slug: opt.label,
+    }));
+  // // 🔹 Props del formulario
+  // interface GamesFormProps {
+  //   selectedGame?: Partial<Game>;
+  //   setSelectedGame: React.Dispatch<
+  //     React.SetStateAction<Partial<Game> | undefined>
+  //   >;
+  // }
 
   return (
-    <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
+    <form className={styles.formContainer}>
+      <h2 className={styles.formTitle}>Formulario de Juegos</h2>
+
       {/* Nombre */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="name">Título:</label>
-        <input
-          className={styles.inputs}
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Nombre del juego"
-          value={selectedGame?.name ?? ""}
-          onChange={(e) => handleChange("name", e.target.value)}
-        />
+      <div className={styles.inputsContainer}>
+        <label>
+          Nombre:
+          <input
+            className={styles.inputs}
+            type="text"
+            value={formData.name || ""}
+            onChange={(e) => handleChange("name", e.target.value)}
+          />
+        </label>
       </div>
-
       {/* Descripción */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="description">Descripción:</label>
-        <textarea
-          className={styles.inputs}
-          id="description"
-          name="description"
-          rows={4}
-          placeholder="Describe tu juego..."
-          value={selectedGame?.description ?? ""}
-          onChange={(e) => handleChange("description", e.target.value)}
-        />
+      <div className={styles.inputsContainer}>
+        <label>
+          Descripción:
+          <textarea
+            className={styles.textarea}
+            value={formData.description || ""}
+            onChange={(e) => handleChange("description", e.target.value)}
+          />
+        </label>
       </div>
-
-      {/* Fecha lanzamiento */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="release">Fecha de lanzamiento:</label>
+      {/* Imagen */}
+      <div className={styles.inputsContainer}>
+        <label>
+          Imagen (URL):
+          <input
+            className={styles.inputs}
+            type="text"
+            value={formData.backgroundImage || ""}
+            onChange={(e) => handleChange("backgroundImage", e.target.value)}
+          />
+        </label>
+      </div>
+      {/* Fecha de lanzamiento */}
+      <label>
+        Fecha de lanzamiento:
         <input
           className={styles.inputs}
           type="date"
-          id="release"
-          name="release"
-          value={
-            selectedGame?.release
-              ? new Date(selectedGame.release).toISOString().slice(0, 10)
-              : ""
-          }
+          value={formData.release || ""}
           onChange={(e) => handleChange("release", e.target.value)}
         />
-      </div>
+      </label>
 
-      {/* Puntaje */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="rating">Puntaje:</label>
+      {/* Rating */}
+      <label>
+        Rating:
         <input
           className={styles.inputs}
           type="number"
-          id="rating"
-          name="rating"
-          min="0"
-          max="10"
-          value={selectedGame?.rating ?? ""}
-          onChange={(e) => handleChange("rating", Number(e.target.value))}
+          min={0}
+          max={10}
+          step={0.1}
+          value={formData.rating || ""}
+          onChange={(e) => handleChange("rating", parseFloat(e.target.value))}
         />
-      </div>
-
-      {/* Imagen */}
-      <div className={styles.inputContainer}>
-        <label>Imagen de fondo:</label>
-        <select
-          value={imageMode}
-          onChange={(e) => setImageMode(e.target.value as "file" | "url")}
-        >
-          <option value="file">Subir archivo</option>
-          <option value="url">Usar enlace</option>
-        </select>
-
-        {imageMode === "file" ? (
-          <input
-            className={styles.inputsImage}
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              if (e.target.files?.[0])
-                handleChange(
-                  "backgroundImage",
-                  URL.createObjectURL(e.target.files[0])
-                );
-            }}
-          />
-        ) : (
-          <input
-            className={styles.inputsImage}
-            type="url"
-            placeholder="https://ejemplo.com/imagen.jpg"
-            value={selectedGame?.backgroundImage ?? ""}
-            onChange={(e) => handleChange("backgroundImage", e.target.value)}
-          />
-        )}
-      </div>
-
-      {/* Desarrolladores */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="developedBy">Desarrolladores:</label>
-        <CustomListbox
-          className="dark"
-          value={selectedDevelopers}
-          onChange={(options) => {
-            setSelectedDevelopers(options);
-            handleChange(
-              "developedBy",
-              options.map((o) => o.value)
-            );
-          }}
-          options={allDevelopers}
-          isMultiple
-          placeholder="Desarrolladores"
-        />
-        <input
-          className={styles.inputs}
-          type="text"
-          name="newDeveloper"
-          id="newDeveloper"
-          placeholder="Agregar desarrollador..."
-        />
-        <button
-          className={styles.buttons}
-          onClick={(e: MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-            const input = document.getElementById(
-              "newDeveloper"
-            ) as HTMLInputElement | null;
-            const value = input?.value.trim();
-            if (!value) return;
-            const newOption = { label: value, value };
-            setSelectedDevelopers((prev) => [...prev, newOption]);
-            handleChange("developedBy", [
-              ...(selectedGame?.developedBy ?? []),
-              value,
-            ]);
-            if (input) input.value = "";
-          }}
-        >
-          Agregar
-        </button>
-      </div>
-
-      {/* Géneros */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="genres">Géneros:</label>
-        <CustomListbox
-          className="dark"
-          value={selectedGenres}
-          onChange={(options) => {
-            setSelectedGenres(options);
-            handleChange(
-              "genres",
-              options.map((o) => o.value)
-            );
-          }}
-          options={allGenres}
-          isMultiple
-          placeholder="Géneros"
-        />
-      </div>
-
-      {/* Plataformas */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="platforms">Plataformas:</label>
-        <CustomListbox
-          className="dark"
-          value={selectedPlatforms}
-          onChange={(options) => {
-            setSelectedPlatforms(options);
-            handleChange(
-              "platforms",
-              options.map((o) => o.value)
-            );
-          }}
-          options={allPlatforms}
-          isMultiple
-          placeholder="Plataformas"
-        />
-      </div>
-
-      {/* Publishers */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="publishers">Publishers:</label>
-        <CustomListbox
-          className="dark"
-          value={selectedPublishers}
-          onChange={(options) => {
-            setSelectedPublishers(options);
-            handleChange(
-              "publishers",
-              options.map((o) => o.value)
-            );
-          }}
-          options={allPublishers}
-          isMultiple
-          placeholder="Publishers"
-        />
-      </div>
-
-      {/* Tags */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="tags">Tags:</label>
-        <CustomListbox
-          className="dark"
-          value={selectedTags}
-          onChange={(options) => {
-            setSelectedTags(options);
-            handleChange(
-              "tags",
-              options.map((o) => o.value)
-            );
-          }}
-          options={allTags}
-          isMultiple
-          placeholder="Etiquetas"
-        />
-      </div>
-
-      {/* Favorito */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="favorite">Favorito:</label>
-        <input
-          className={styles.inputs}
-          type="checkbox"
-          id="favorite"
-          checked={selectedGame?.favorite ?? false}
-          onChange={(e) => handleChange("favorite", e.target.checked)}
-        />
-      </div>
-
-      {/* Fuente */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="source">Fuente:</label>
-        <select
-          id="source"
-          value={selectedGame?.source ?? "DATABASE"}
-          onChange={(e) => handleChange("source", e.target.value)}
-        >
-          <option value="API">API</option>
-          <option value="DATABASE">DATABASE</option>
-        </select>
-      </div>
+      </label>
 
       {/* TBA */}
-      <div className={styles.inputContainer}>
-        <label htmlFor="tba">¿Aún no lanzado?</label>
+      <label>
+        ¿Por anunciar? (TBA):
         <input
           className={styles.inputs}
           type="checkbox"
-          id="tba"
-          checked={selectedGame?.tba ?? false}
+          checked={!!formData.tba}
           onChange={(e) => handleChange("tba", e.target.checked)}
         />
-      </div>
+      </label>
 
-      <button type="submit">Guardar juego</button>
+      {/* Fuente */}
+      <label>
+        Fuente:
+        <CustomListbox
+          placeholder="Origen"
+          options={mockSource}
+          isMultiple={false}
+          value={
+            formData.source != null
+              ? {
+                  label: formData.source.toString(),
+                  value: formData.source.toString(),
+                }
+              : null
+          }
+          onChange={(e) => handleChange("source", e?.label)}
+        />
+      </label>
+
+      {/* Favorito */}
+      <label>
+        Favorito:
+        <input
+          type="checkbox"
+          checked={!!formData.favorite}
+          onChange={(e) => handleChange("favorite", e.target.checked)}
+        />
+      </label>
+
+      {/* GÉNEROS */}
+      <CustomListbox
+        placeholder="Géneros"
+        isMultiple={true}
+        value={
+          formData.genres?.map((g) => ({
+            label: g.name,
+            value: g.slug,
+          })) || []
+        }
+        options={allGenres}
+        onChange={(val) => handleChange("genres", normalizeOptionsToSlugs(val))}
+      />
+
+      {/* PLATAFORMAS */}
+      <CustomListbox
+        placeholder="Plataformas"
+        isMultiple={true}
+        value={
+          formData.platforms?.map((p) => ({
+            label: p.name,
+            value: p.slug,
+          })) || []
+        }
+        options={allPlatforms}
+        onChange={(val) =>
+          handleChange("platforms", normalizeOptionsToSlugs(val))
+        }
+      />
+
+      {/* DESARROLLADORES */}
+      <CustomListbox
+        placeholder="Desarrolladores"
+        isMultiple={true}
+        value={
+          formData.developedBy?.map((d) => ({
+            label: d.name,
+            value: d.slug,
+          })) || []
+        }
+        options={allDevelopers}
+        onChange={(val) =>
+          handleChange("developedBy", normalizeOptionsToSlugs(val))
+        }
+      />
+
+      {/* PUBLISHERS */}
+      <CustomListbox
+        placeholder="Publishers"
+        isMultiple={true}
+        value={
+          formData.publishers?.map((p) => ({
+            label: p.name,
+            value: p.slug,
+          })) || []
+        }
+        options={allPublishers}
+        onChange={(val) =>
+          handleChange("publishers", normalizeOptionsToSlugs(val))
+        }
+      />
+
+      {/* STORES */}
+      <CustomListbox
+        placeholder="Plataformas"
+        isMultiple={true}
+        value={
+          formData.stores?.map((s) => ({
+            label: s.name,
+            value: s.slug,
+          })) || []
+        }
+        options={allStores}
+        onChange={(val) => handleChange("stores", normalizeOptionsToSlugs(val))}
+      />
+
+      {/* TAGS */}
+      <CustomListbox
+        placeholder="Plataformas"
+        isMultiple={true}
+        value={
+          formData.tags?.map((t) => ({
+            label: t.name,
+            value: t.slug,
+          })) || []
+        }
+        options={allTags}
+        onChange={(val) => handleChange("tags", normalizeOptionsToSlugs(val))}
+      />
+
+      {/* REQUISITOS */}
+      <fieldset className={styles.requirementsSection}>
+        <legend>Requisitos</legend>
+        <label>
+          Mínimos:
+          <textarea
+            className={styles.textarea}
+            value={formData.requirements?.minimum || ""}
+            onChange={(e) =>
+              handleChange("requirements", {
+                ...formData.requirements,
+                minimum: e.target.value,
+              })
+            }
+          />
+        </label>
+        <label>
+          Recomendados:
+          <textarea
+            className={styles.textarea}
+            value={formData.requirements?.recommended || ""}
+            onChange={(e) =>
+              handleChange("requirements", {
+                ...formData.requirements,
+                recommended: e.target.value,
+              })
+            }
+          />
+        </label>
+      </fieldset>
     </form>
   );
 };
