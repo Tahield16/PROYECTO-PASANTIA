@@ -15,9 +15,9 @@ export const CreateGame = () => {
     <main className={styles.createGameContainer}>
       <div className="formContainer">
         <TitleTextContainer
-          title="Reescribe la historia de este juego"
-          text="Perfecciona tu juego y"
-          highlited="llevalo al siguiente nivel."
+          title="Haz que tu juego trascienda"
+          text="Crea tu propio guerrero, y"
+          highlited="sorprende al mundo con tu creación"
         />
         <GamesForm setSelectedGame={setSelectedGame} selectedGame={selectedGame}/>
       </div>
