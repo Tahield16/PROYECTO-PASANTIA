@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGamesStore } from "../../store/gamesStore";
+import { useGamesMockedStore } from "../../store/gamesStore";
 import type { Game } from "../../types/gameType";
 import { RatingBar } from "../RatingBar/RatingBar";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
@@ -9,7 +9,7 @@ interface GameDetailsProps {
   _id: Game["_id"];
 }
 export const GameDetails = ({ _id }: GameDetailsProps) => {
-  const { games } = useGamesStore();
+  const { games } = useGamesMockedStore();
   const selectedGame = games.find((game) => game._id === _id);
   const maxThumbnails: number | undefined = selectedGame?.shortScreenshots
     ?.length
@@ -63,8 +63,8 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
             {thumbnails.map((screenshot, i) => (
               <div key={i}>
                 <img
-                // () => handleClickImg(screenshot.image)
-                  onClick={()=>{}}
+                  // () => handleClickImg(screenshot.image)
+                  onClick={() => {}}
                   src={screenshot.image}
                   alt={`${selectedGame?.name}_gameplay_ss`}
                   className={styles.screenshot}

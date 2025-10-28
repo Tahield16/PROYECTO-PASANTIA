@@ -1,4 +1,4 @@
-import { useGamesStore } from "../../store/gamesStore";
+import { useGamesMockedStore } from "../../store/gamesStore";
 import { useState } from "react";
 import type { Game } from "../../types/gameType";
 import { GamesForm } from "../GamesForm/GamesForm";
@@ -8,9 +8,11 @@ import styles from "./CreateGame.module.scss";
 
 type GamesCardProps = Partial<Game>;
 export const CreateGame = () => {
-  const { games } = useGamesStore();
-  const [selectedGame, setSelectedGame] = useState<GamesCardProps | undefined>();
-  console.log(selectedGame)
+  const { games } = useGamesMockedStore();
+  const [selectedGame, setSelectedGame] = useState<
+    GamesCardProps | undefined
+  >();
+  console.log(selectedGame);
   return (
     <main className={styles.createGameContainer}>
       <div className="formContainer">
@@ -19,7 +21,10 @@ export const CreateGame = () => {
           text="Crea tu propio guerrero, y"
           highlited="sorprende al mundo con tu creación"
         />
-        <GamesForm setSelectedGame={setSelectedGame} selectedGame={selectedGame}/>
+        <GamesForm
+          setSelectedGame={setSelectedGame}
+          selectedGame={selectedGame}
+        />
       </div>
       <div>
         <CardForm {...selectedGame} />

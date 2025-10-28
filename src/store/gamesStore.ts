@@ -297,7 +297,7 @@ interface GamesState {
   setGames: (games: Games) => void;
 }
 
-export const useGamesStore = create<GamesState>((set) => ({
+export const useGamesMockedStore = create<GamesState>((set) => ({
   games: realMockGames,
   addGame: (game: Game) => set((state) => ({ games: [...state.games, game] })),
   deleteGame: (gameId: number) =>

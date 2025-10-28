@@ -1,4 +1,4 @@
-import { useGamesStore } from "../../store/gamesStore";
+import { useGamesMockedStore } from "../../store/gamesStore";
 import { useState } from "react";
 import type { Game } from "../../types/gameType";
 import { GamesForm } from "../GamesForm/GamesForm";
@@ -10,11 +10,11 @@ interface EditGameProps {
 }
 type GamesCardProps = Partial<Game>;
 export const EditGame = ({ _id }: EditGameProps) => {
-  const { games } = useGamesStore();
+  const { games } = useGamesMockedStore();
   const [selectedGame, setSelectedGame] = useState<GamesCardProps | undefined>(
     () => games.find((g) => g._id === _id)
   );
-  console.log(selectedGame)
+  console.log(selectedGame);
   return (
     <main className={styles.editGameContainer}>
       <div className="formContainer">
@@ -23,7 +23,10 @@ export const EditGame = ({ _id }: EditGameProps) => {
           text="Perfecciona tu juego y"
           highlited="llevalo al siguiente nivel."
         />
-        <GamesForm setSelectedGame={setSelectedGame} selectedGame={selectedGame}/>
+        <GamesForm
+          setSelectedGame={setSelectedGame}
+          selectedGame={selectedGame}
+        />
       </div>
       <div>
         <CardForm {...selectedGame} />
