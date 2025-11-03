@@ -3,20 +3,22 @@ import styles from "./card.module.scss";
 import placeholderImage from "/assets/videogames-placeholder.png";
 type GameCardProps = Partial<Game>;
 export const Card = ({
-  _id,
+  id,
   name,
-  backgroundImage,
+  background_image,
   rating,
   genres,
+  tags,
   description,
   favorite,
-  release,
+  released,
   developedBy,
 }: GameCardProps) => {
   const favImgRoute = favorite
     ? "/assets/Activated-favs.svg"
     : "/assets/Deactivated-favs.svg";
-  const imgRoute = backgroundImage ? backgroundImage : placeholderImage;
+  const imgRoute = background_image ? background_image : placeholderImage;
+  console.log({ id, name, background_image, genres, released, favorite,tags });
   return (
     <div className={styles.cardContainer}>
       <div className="logoContainer">
@@ -49,7 +51,7 @@ export const Card = ({
         )}
         <div className={styles.genresContainer}>
           {genres?.map((genre) => (
-            <div className={styles.genreWrapper} key={`${_id}-${genre}`}>
+            <div className={styles.genreWrapper} key={`${id}-${genre}`}>
               <span>{genre.slug}</span>
             </div>
           ))}
@@ -67,10 +69,10 @@ export const Card = ({
             </p>
           </div>
         )}
-        {release && (
+        {released && (
           <p>
             Fecha de salida:{" "}
-            <span className={styles.releaseDate}>{release}</span>
+            <span className={styles.releaseDate}>{released}</span>
           </p>
         )}
         {description && <p className={styles.description}>{description}</p>}
@@ -78,4 +80,3 @@ export const Card = ({
     </div>
   );
 };
-

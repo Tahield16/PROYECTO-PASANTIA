@@ -12,7 +12,7 @@ export const CardForm = ({
   developedBy,
   favorite,
   backgroundImage,
-  release,
+  released: release,
   description,
   tags,
   platforms,
@@ -73,7 +73,10 @@ export const CardForm = ({
           <div className={styles.genresContainer}>
             <p>Plataformas:</p>
             {platforms.map((platform) => (
-              <div className={styles.genreWrapper} key={`${_id}-${platform.slug}`}>
+              <div
+                className={styles.genreWrapper}
+                key={`${_id}-${platform.slug}`}
+              >
                 <span>{platform.name || platform.slug}</span>
               </div>
             ))}
@@ -136,7 +139,9 @@ export const CardForm = ({
           <div className={styles.requirementsContainer}>
             <p>Requisitos:</p>
             {requirements.minimum && <p>Mínimos: {requirements.minimum}</p>}
-            {requirements.recommended && <p>Recomendados: {requirements.recommended}</p>}
+            {requirements.recommended && (
+              <p>Recomendados: {requirements.recommended}</p>
+            )}
           </div>
         )}
 

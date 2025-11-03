@@ -1,14 +1,21 @@
-import { useGamesMockedStore } from "../../store/gamesStore";
-import { GameCardLink } from "../CardGame/CardLink/GameCardLink";
-import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
-import { FiltersContainer } from "../Filters/FiltersContainer";
-import styles from "./Landing.module.scss";
 import { useFetchGames } from "../../hooks/useFetchGames";
+import { useGamesStore } from "../../store/gamesStoreApi";
+import type { GamesFilters } from "../../types/gameType";
+import { GameCardLink } from "../CardGame/CardLink/GameCardLink";
+import { FiltersContainer } from "../Filters/FiltersContainer";
+import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
+import styles from "./Landing.module.scss";
 const Landing = () => {
-  const { games } = useGamesMockedStore();
-  const fetch=useFetchGames()
+  const { games } = useGamesStore();
+  console.log({games:games});
+  const filters: GamesFilters = {
+    sort: "-rating",
+    search: "GTA",
+    pageSize:5,
+  };
+  const fetch = useFetchGames(filters);
 
-  console.log({data:fetch.data})
+  console.log({ data: fetch.data });
   return (
     <main className={styles.landingContainer}>
       <TitleTextContainer
@@ -19,7 +26,7 @@ const Landing = () => {
       <FiltersContainer />
       <section className={styles.gamesContainer}>
         {games.map((game) => (
-          <GameCardLink key={game._id} {...game} />
+          <GameCardLink key={game.id} {...game} />
         ))}
       </section>
     </main>

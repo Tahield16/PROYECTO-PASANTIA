@@ -3,10 +3,12 @@ import type { Game } from "../types/gameType";
 
 interface GamesState {
     games:Game[],
-    set:(state:Partial<GamesState>)=>void
+    set:(state:Partial<GamesState>)=>void,
+    page_number:number
 }
 const initialState={
-    games:[]
+    games:[],
+    page_number:1
 }
 export const useGamesStore=create<GamesState>()(
     (set)=>({

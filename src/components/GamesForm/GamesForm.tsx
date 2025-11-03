@@ -170,7 +170,7 @@ export const GamesForm = ({
         <input
           className={styles.inputs}
           type="date"
-          value={formData.release || ""}
+          value={formData.released || ""}
           onChange={(e) => handleChange("release", e.target.value)}
         />
       </label>

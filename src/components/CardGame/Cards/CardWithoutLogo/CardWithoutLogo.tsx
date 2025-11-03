@@ -8,7 +8,7 @@ export const CardWithoutLogo = ({
   genres,
   description,
   favorite,
-  release,
+  released: release,
   developedBy,
 }: GameCardProps) => {
   const favImgRoute = favorite

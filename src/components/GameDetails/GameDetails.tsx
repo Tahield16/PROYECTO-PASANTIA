@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useGamesMockedStore } from "../../store/gamesStore";
+
 import type { Game } from "../../types/gameType";
 import { RatingBar } from "../RatingBar/RatingBar";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
 import styles from "./GameDetails.module.scss";
+import { useGamesStore } from "../../store/gamesStoreApi";
 
 interface GameDetailsProps {
-  _id: Game["_id"];
+  id: Game["id"];
 }
-export const GameDetails = ({ _id }: GameDetailsProps) => {
-  const { games } = useGamesMockedStore();
-  const selectedGame = games.find((game) => game._id === _id);
+export const GameDetails = ({ id }: GameDetailsProps) => {
+  const { games } = useGamesStore();
+  const selectedGame = games.find((game) => game.id === id);
   const maxThumbnails: number | undefined = selectedGame?.shortScreenshots
     ?.length
     ? selectedGame.shortScreenshots.length >= 4
@@ -18,7 +19,7 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
       : selectedGame.shortScreenshots.length
     : undefined;
   const [mainImgSource, setMainImgSource] = useState(
-    selectedGame?.backgroundImage
+    selectedGame?.background_image
   );
   const [thumbnails, setThumbnails] = useState(
     selectedGame?.shortScreenshots
@@ -49,7 +50,7 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
             <span className={styles.relaseHighlight}>
               Fecha de lanzamiento:
             </span>{" "}
-            {selectedGame?.release}
+            {selectedGame?.released}
           </p>
         </section>
 
@@ -81,7 +82,7 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
               <a
                 href={url}
                 target="_blank"
-                key={`${selectedGame._id}-${store.name}`}
+                key={`${selectedGame.id}-${store.name}`}
               >
                 <div className={styles.platformWrapper}>
                   <img
@@ -118,7 +119,7 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
               {selectedGame?.tags?.map((tag) => (
                 <div
                   className={styles.genreWrapper}
-                  key={`${selectedGame._id}-${tag.name}`}
+                  key={`${selectedGame.id}-${tag.name}`}
                 >
                   <span>{tag.slug}</span>
                 </div>
@@ -126,7 +127,7 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
               {selectedGame?.tags?.map((tag) => (
                 <div
                   className={styles.genreWrapper}
-                  key={`${selectedGame._id}-${tag.name}`}
+                  key={`${selectedGame.id}-${tag.name}`}
                 >
                   <span>{tag.slug}</span>
                 </div>
@@ -140,7 +141,7 @@ export const GameDetails = ({ _id }: GameDetailsProps) => {
               {selectedGame?.genres?.map((genre) => (
                 <div
                   className={styles.genreWrapper}
-                  key={`${selectedGame._id}-${genre.name}`}
+                  key={`${selectedGame.id}-${genre.name}`}
                 >
                   <span>{genre.slug}</span>
                 </div>

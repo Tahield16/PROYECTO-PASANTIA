@@ -3,23 +3,26 @@ import type { Game } from "../../../types/gameType";
 import { Card } from "../Cards/Card/Card";
 import styles from "./GameCardLink.module.scss";
 export const GameCardLink = (game: Game) => {
-  const { _id } = game;
+  const { id } = game;
   return (
     <article className={styles.cardContainer}>
-      <Link to="/$gameId" params={{ gameId: String(_id) }}>
+      <Link to="/$gameId" params={{ gameId: String(id) }}>
         <Card
-          _id={_id}
+          id={id}
           name={game.name}
-          backgroundImage={game.backgroundImage}
-          description={game.description}
+          background_image={game.background_image}
+          // description={game.description} Eliminarlo de las cards, pq la api no lo trae en /games
+          genres={game.genres}
+          tags={game.tags}
           favorite={game.favorite}
           rating={game.rating}
-          key={_id}
+          key={id}
+          released={game.released}
         />
       </Link>
       <Link
         to="/$gameId/edit"
-        params={{ gameId: String(_id) }}
+        params={{ gameId: String(id) }}
         className={styles.editLink}
       >
         <img
