@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useGamesStore } from "../store/gamesStoreApi";
 import { ApiService } from "../services/api/ApiService";
 import { useEffect } from "react";
-import type { Game, GamesFilters } from "../types/gameType";
+import type { Game, GamesFilter } from "../types/gameType";
 
-const makeGamesKey = (f?: GamesFilters) => [
+const makeGamesKey = (f?: GamesFilter) => [
   "games",
   f?.page ?? 1,
   f?.pageSize ?? 20,
@@ -16,7 +16,7 @@ const makeGamesKey = (f?: GamesFilters) => [
   f?.sort ?? "",
 ];
 
-export const useFetchGames = (filters?: GamesFilters) => {
+export const useFetchGames = (filters?: GamesFilter) => {
   const { set } = useGamesStore();
 
   const query = useQuery({

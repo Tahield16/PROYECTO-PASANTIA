@@ -6,13 +6,13 @@ import type { Screenshots } from "./shortScreenshots";
 import type { Stores } from "./storesType";
 import type { ratings } from "./note";
 export interface Game {
-  _id: number; // id del juego
+  id: number; // id del juego
   name: string; // nombre
   tba: boolean; // to be announced
   description: string; // descripción larga (HTML a veces)
-  release: string; // released (fecha lanzamiento)
+  released: string; // released (fecha lanzamiento)
   rating: number; // promedio de rating
-  backgroundImage: string | undefined; // background_image
+  background_image: string | undefined; // background_image
   genres: Slug[]; // relación con Genre tipado abajo
   favorite: boolean; // flag manual
   source: "API" | "DATABASE"; // de dónde viene
@@ -21,8 +21,17 @@ export interface Game {
   requirements?: Requirements;
   stores?: Slug[];
   tags?: Slug[];
-  publishers?:Slug[];
+  publishers?: Slug[];
   shortScreenshots?: Screenshots;
   ratings?: ratings;
 }
-type Games = Game[];
+export type GamesFilter = {
+  page?: number;
+  pageSize?: number;
+  genres?: number[]; // ids
+  tags?: number[]; // ids
+  publishers?: number[]; // ids
+  source?: "API" | "DATABASE";
+  search?: string; // search text
+  sort?: string;
+};

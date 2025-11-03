@@ -1,17 +1,17 @@
 import { useFetchGames } from "../../hooks/useFetchGames";
 import { useGamesStore } from "../../store/gamesStoreApi";
-import type { GamesFilters } from "../../types/gameType";
+import type { GamesFilter } from "../../types/gameType";
 import { GameCardLink } from "../CardGame/CardLink/GameCardLink";
 import { FiltersContainer } from "../Filters/FiltersContainer";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
 import styles from "./Landing.module.scss";
 const Landing = () => {
   const { games } = useGamesStore();
-  console.log({games:games});
-  const filters: GamesFilters = {
+  console.log({ games: games });
+  const filters: GamesFilter = {
     sort: "-rating",
     search: "GTA",
-    pageSize:5,
+    pageSize: 5,
   };
   const fetch = useFetchGames(filters);
 
