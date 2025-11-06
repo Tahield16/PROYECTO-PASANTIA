@@ -1,7 +1,7 @@
-import type { Game } from "../../types/gameType";
+import type { FilterGameList, Game } from "../../types/gameType";
 import { axiosInstance } from "./axiosInstance";
 export interface GamesResponse {
-  results:Game[];
+  results: Game[];
   seo_title: string;
   seo_description: string;
   seo_keywords: string;
@@ -13,8 +13,25 @@ export interface GamesResponse {
   nofollow_collections: string[];
 }
 
-const getGames = ():Promise<GamesResponse> => {
-  return axiosInstance.get("/games");
+
+const getGames = (filters:FilterGameList):Promise<GamesResponse> => {
+  console.log(filters);
+  return axiosInstance.get("/games", {
+    params: {
+      genres: filters.genres?.join(","),
+      search: filters?.search,
+      page: filters.page,
+      dates:
+        filters.releaseFrom && filters.releaseTo
+          ? `${filters.releaseFrom},${filters.releaseTo}`
+          : undefined,
+      page_size: filters.pageSize,
+      publishers: filters.publishers?.join(","),
+      developers: filters.developmentTeam?.join(","),
+      ordering: filters.ordering?.toString(),
+      tags: filters.tags?.join(","),
+    },
+  });
 };
 
 export const ApiService = {

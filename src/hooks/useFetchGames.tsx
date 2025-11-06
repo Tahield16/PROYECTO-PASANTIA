@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { useGamesStore } from "../store/gamesStoreApi";
-import { ApiService } from "../services/api/ApiService";
 import { useEffect } from "react";
-import type { Game, GamesFilter } from "../types/gameType";
+import { ApiService } from "../services/api/ApiService";
+import { useGamesStore } from "../store/gamesStoreApi";
+import type { FilterGameList } from "../types/gameType";
 
-const makeGamesKey = (f?: GamesFilter) => [
+const makeGamesKey = (f?: FilterGameList) => [
   "games",
   f?.page ?? 1,
   f?.pageSize ?? 20,
@@ -13,12 +13,12 @@ const makeGamesKey = (f?: GamesFilter) => [
   (f?.publishers ?? []).join(","),
   f?.source ?? "",
   f?.search ?? "",
-  f?.sort ?? "",
+  f?.ordering ?? "",
 ];
 
-export const useFetchGames = (filters?: GamesFilter) => {
-  const { set } = useGamesStore();
-
+export const useFetchGameList = () => {
+  const {games, set,filters } = useGamesStore();
+  console.log("Haciendo querie")
   const query = useQuery({
     queryKey: makeGamesKey(filters),
     queryFn: () => ApiService.getGames(filters),
@@ -26,7 +26,7 @@ export const useFetchGames = (filters?: GamesFilter) => {
   });
   useEffect(() => {
     if (query.data) {
-      set({ games: query.data.results });
+      set({ games: [ ...games, ...query.data.results] });
     }
   }, [query.data]);
   return query;
