@@ -5,13 +5,13 @@ import placeholderImage from "/assets/videogames-placeholder.png";
 type CardFormProps = Partial<Game>;
 
 export const CardForm = ({
-  _id,
+  id,
   name,
   rating,
-  genres,
-  developedBy,
+  genres: genres,
+  developmentTeam: developedBy,
   favorite,
-  backgroundImage,
+  background_image,
   released: release,
   description,
   tags,
@@ -26,7 +26,7 @@ export const CardForm = ({
     ? "/assets/Activated-favs.svg"
     : "/assets/Deactivated-favs.svg";
 
-  const imgRoute = backgroundImage || placeholderImage;
+  const imgRoute = background_image || placeholderImage;
 
   return (
     <section className={styles.cardContainer}>
@@ -62,7 +62,7 @@ export const CardForm = ({
           <div className={styles.genresContainer}>
             <p>Géneros:</p>
             {genres.map((genre) => (
-              <div className={styles.genreWrapper} key={`${_id}-${genre.slug}`}>
+              <div className={styles.genreWrapper} key={`${id}-${genre.slug}`}>
                 <span>{genre.name || genre.slug}</span>
               </div>
             ))}
@@ -75,7 +75,7 @@ export const CardForm = ({
             {platforms.map((platform) => (
               <div
                 className={styles.genreWrapper}
-                key={`${_id}-${platform.slug}`}
+                key={`${id}-${platform.slug}`}
               >
                 <span>{platform.name || platform.slug}</span>
               </div>
@@ -117,7 +117,7 @@ export const CardForm = ({
           <div className={styles.genresContainer}>
             <p>Etiquetas:</p>
             {tags.map((tag) => (
-              <div className={styles.genreWrapper} key={`${_id}-${tag.slug}`}>
+              <div className={styles.genreWrapper} key={`${id}-${tag.slug}`}>
                 <span>{tag.name || tag.slug}</span>
               </div>
             ))}
@@ -128,7 +128,7 @@ export const CardForm = ({
           <div className={styles.genresContainer}>
             <p>Tiendas:</p>
             {stores.map((store) => (
-              <div className={styles.genreWrapper} key={`${_id}-${store.slug}`}>
+              <div className={styles.genreWrapper} key={`${id}-${store.slug}`}>
                 <span>{store.name || store.slug}</span>
               </div>
             ))}

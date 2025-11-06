@@ -2,14 +2,14 @@ import type { Game } from "../../../../types/gameType";
 import styles from "./card.module.scss";
 type GameCardProps = Partial<Game>;
 export const CardWithoutLogo = ({
-  _id,
+  id,
   name,
   rating,
-  genres,
+  genres: genres,
   description,
   favorite,
   released: release,
-  developedBy,
+  developmentTeam: developedBy,
 }: GameCardProps) => {
   const favImgRoute = favorite
     ? "/assets/Activated-favs.svg"
@@ -40,7 +40,7 @@ export const CardWithoutLogo = ({
         )}
         <div className={styles.genresContainer}>
           {genres?.map((genre) => (
-            <div className={styles.genreWrapper} key={`${_id}-${genre}`}>
+            <div className={styles.genreWrapper} key={`${id}-${genre}`}>
               <span>{genre.slug}</span>
             </div>
           ))}
@@ -51,7 +51,7 @@ export const CardWithoutLogo = ({
               Desarrollado por:{" "}
               {developedBy?.map((developer, index) => (
                 <span key={index} className={styles.developer}>
-                  {developer}
+                  {developer.slug}
                   {index < developedBy.length - 1 && <span>,</span>}
                 </span>
               ))}

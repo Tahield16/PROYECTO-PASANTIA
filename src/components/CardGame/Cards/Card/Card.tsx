@@ -12,13 +12,13 @@ export const Card = ({
   description,
   favorite,
   released,
-  developedBy,
+  developmentTeam: developedBy,
 }: GameCardProps) => {
   const favImgRoute = favorite
     ? "/assets/Activated-favs.svg"
     : "/assets/Deactivated-favs.svg";
   const imgRoute = background_image ? background_image : placeholderImage;
-  console.log({ id, name, background_image, genres, released, favorite,tags });
+  // console.log({ id, name, background_image, genres, released, favorite, tags });
   return (
     <div className={styles.cardContainer}>
       <div className="logoContainer">
@@ -51,8 +51,15 @@ export const Card = ({
         )}
         <div className={styles.genresContainer}>
           {genres?.map((genre) => (
-            <div className={styles.genreWrapper} key={`${id}-${genre}`}>
+            <div className={styles.genreWrapper} key={`${id}-${genre.slug}`}>
               <span>{genre.slug}</span>
+            </div>
+          ))}
+        </div>
+        <div className={styles.genresContainer}>
+          {tags?.map((tag) => (
+            <div className={styles.genreWrapper} key={`${id}-${tag.slug}`}>
+              <span>{tag.slug}</span>
             </div>
           ))}
         </div>
@@ -62,7 +69,7 @@ export const Card = ({
               Desarrollado por:{" "}
               {developedBy?.map((developer, index) => (
                 <span key={index} className={styles.developer}>
-                  {developer}
+                  {developer.name}
                   {index < developedBy.length - 1 && <span>,</span>}
                 </span>
               ))}
