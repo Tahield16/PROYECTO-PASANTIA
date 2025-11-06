@@ -12,3 +12,45 @@
   gap: 1rem; // espacio entre columnas
   align-items: start; // opcional, alinea los items al inicio vertical
 }
+.dateInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db; /* gris suave */
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+
+  /* transición suave */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* foco */
+.dateInput:focus {
+  outline: none;
+  border-color: #6366f1;  /* violeta suave */
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
+}
+
+/* hover */
+.dateInput:hover {
+  border-color: #9ca3af;
+}
+
+/* estilos sdateInput está disabled */
+.dateInput:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* ícono del calendario (Chrome, Edge, etc.) */
+.dateInput::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 6px;
+  padding: 3px;
+  transition: background 0.2s ease;
+}
+
+.dateInput::-webkit-calendar-picker-indicator:hover {
+  background: #e5e7eb;
+}
