@@ -7,6 +7,7 @@ import {
 import type { OptionsArray, Option } from "../../types/comboboxOptionsType";
 import { useState } from "react";
 import styles from "./CustomCombobox.module.scss";
+import debounce from "lodash/debounce";
 
 interface ComboboxPropsType {
   value: Option | null;
@@ -15,7 +16,9 @@ interface ComboboxPropsType {
   options: OptionsArray;
   img?: string;
   placeholder?: string;
+  allowCustomValue?: boolean;
 }
+
 export const CustomCombobox = ({
   value,
   onChange,
@@ -23,15 +26,35 @@ export const CustomCombobox = ({
   options,
   img,
   placeholder,
+  allowCustomValue = true, // nuevo prop para controlar si se permiten valores personalizados
 }: ComboboxPropsType) => {
   const theme = className == "dark" ? styles.darkTheme : styles.lightTheme;
   const [query, setQuery] = useState("");
+
+  // Debounce para evitar muchas actualizaciones mientras se escribe
+  const debouncedOnChange = debounce((text: string) => {
+    if (allowCustomValue) {
+      onChange({ id: text, name: text });
+    }
+  }, 500);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const text = event.target.value;
+    setQuery(text);
+    debouncedOnChange(text);
+  };
+
   const filteredOptions =
     query === ""
       ? options
-      : options.filter((option) =>
-          option.name.toLowerCase().includes(query.toLowerCase())
-        );
+      : [
+          // Incluir el valor actual como primera opción si no está en las opciones
+          ...(allowCustomValue ? [{ id: query, name: query }] : []),
+          ...options.filter((option) =>
+            option.name.toLowerCase().includes(query.toLowerCase())
+          ),
+        ];
+
   return (
     <div className={styles.relative}>
       <Combobox value={value} onChange={onChange}>
@@ -40,7 +63,7 @@ export const CustomCombobox = ({
           <ComboboxInput
             aria-label="Asignee"
             displayValue={(item: Option | null) => (item ? item.name : "")}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={handleInputChange}
             className={`${theme} ${styles.input}`}
           />
 
