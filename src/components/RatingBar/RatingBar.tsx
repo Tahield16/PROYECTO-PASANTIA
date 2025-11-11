@@ -3,6 +3,7 @@ import styles from "./RatingBar.module.scss";
 type RatingsProps = { ratings?: ratings };
 export const RatingBar = ({ ratings }: RatingsProps) => {
   if (!ratings || ratings.length<=0) return <></>  
+  console.log(ratings)
   return (
     <div className={styles.ratingBarContainer}>
       <div className={styles.bar}>
@@ -10,8 +11,8 @@ export const RatingBar = ({ ratings }: RatingsProps) => {
           <div
             key={i}
             className={`${styles.segment} ${styles[r.title.toLowerCase()]}`}
-            style={{ width: `${r.percentage}%` }}
-            title={`${r.title}: ${r.percentage}%`}
+            style={{ width: `${r.percent}%` }}
+            title={`${r.title}: ${r.percent}%`}
           ></div>
         ))}
       </div>
@@ -22,7 +23,7 @@ export const RatingBar = ({ ratings }: RatingsProps) => {
             <span
               className={`${styles.dot} ${styles[r.title.toLowerCase()]}`}
             ></span>
-            {r.title} — {r.percentage}%
+            {r.title} — {r.percent}%
           </div>
         ))}
       </div>
