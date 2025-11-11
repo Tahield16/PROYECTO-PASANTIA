@@ -159,8 +159,8 @@ export const GamesForm = ({
           <input
             className={styles.inputs}
             type="text"
-            value={formData.backgroundImage || ""}
-            onChange={(e) => handleChange("backgroundImage", e.target.value)}
+            value={formData.background_image || ""}
+            onChange={(e) => handleChange("background_image", e.target.value)}
           />
         </label>
       </div>
@@ -171,7 +171,7 @@ export const GamesForm = ({
           className={styles.inputs}
           type="date"
           value={formData.released || ""}
-          onChange={(e) => handleChange("release", e.target.value)}
+          onChange={(e) => handleChange("released", e.target.value)}
         />
       </label>
 
@@ -249,8 +249,8 @@ export const GamesForm = ({
         isMultiple={true}
         value={
           formData.platforms?.map((p) => ({
-            label: p.name,
-            value: p.slug,
+            label: p.platform.name,
+            value: p.platform.slug,
           })) || []
         }
         options={allPlatforms}
@@ -264,14 +264,14 @@ export const GamesForm = ({
         placeholder="Desarrolladores"
         isMultiple={true}
         value={
-          formData.developedBy?.map((d) => ({
+          formData.developers?.map((d) => ({
             label: d.name,
             value: d.slug,
           })) || []
         }
         options={allDevelopers}
         onChange={(val) =>
-          handleChange("developedBy", normalizeOptionsToSlugs(val))
+          handleChange("developers", normalizeOptionsToSlugs(val))
         }
       />
 
@@ -297,8 +297,8 @@ export const GamesForm = ({
         isMultiple={true}
         value={
           formData.stores?.map((s) => ({
-            label: s.name,
-            value: s.slug,
+            label: s.store.name,
+            value: s.store.slug,
           })) || []
         }
         options={allStores}
