@@ -13,8 +13,7 @@ export interface GamesResponse {
   nofollow_collections: string[];
 }
 
-
-const getGames = (filters:FilterGameList):Promise<GamesResponse> => {
+const getGames = (filters: FilterGameList): Promise<GamesResponse> => {
   console.log(filters);
   return axiosInstance.get("/games", {
     params: {
@@ -33,7 +32,14 @@ const getGames = (filters:FilterGameList):Promise<GamesResponse> => {
     },
   });
 };
+const getGameById = (id: number):Promise<Game> => {
+  
+    console.log(id);
 
+    return axiosInstance.get(`/games/${id.toString()}`);
+  
+};
 export const ApiService = {
   getGames,
+  getGameById,
 };
