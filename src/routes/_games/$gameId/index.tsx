@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GameDetails } from "../../../components/GameDetails/GameDetails";
+import { useFetchGameById } from "../../../hooks/useFetchGameById";
+import { Spinner } from "../../../components/Spinner/Spinner";
 type GameParams = {
   gameId: number;
 };
@@ -12,9 +14,10 @@ export const Route = createFileRoute("/_games/$gameId/")({
 function RouteComponent() {
   const { gameId }: GameParams = Route.useParams();
   const parsedGameId=Number(gameId);
-  return (
-    <>
-      <GameDetails _id={parsedGameId} />
-    </>
-  );
+   const {isLoading}=  useFetchGameById(parsedGameId);
+   
+  return isLoading ? <Spinner message="Cargando juego" /> :<GameDetails />
+  
+    
+   
 }
