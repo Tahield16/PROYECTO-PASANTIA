@@ -42,8 +42,8 @@ export const GameDetails = () => {
         <section className={styles.ratingGameContainer}>
           <div className={styles.platformsContainer}>
             <p className={styles.textHighlight}>Conseguilo en: </p>
-            {game?.stores?.map(({ url, store }) => (
-              <a href={url} target="_blank" key={`${game.id}-${store.name}`}>
+            {game?.stores?.map(({ store }) => (
+              <a href={store.domain} target="_blank" key={`${game.id}-${store.name}`}>
                 <div className={styles.platformWrapper}>
                   <img
                     src={store.image_background}
