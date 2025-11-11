@@ -9,7 +9,7 @@ export const CardForm = ({
   name,
   rating,
   genres: genres,
-  developmentTeam: developedBy,
+  developers: developedBy,
   favorite,
   background_image,
   released: release,

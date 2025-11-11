@@ -12,7 +12,7 @@ export const Card = ({
   description,
   favorite,
   released,
-  developmentTeam: developedBy,
+  developers: developedBy,
 }: GameCardProps) => {
   const favImgRoute = favorite
     ? "/assets/Activated-favs.svg"

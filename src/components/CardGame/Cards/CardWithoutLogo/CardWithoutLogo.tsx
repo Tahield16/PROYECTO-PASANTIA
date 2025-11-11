@@ -9,7 +9,7 @@ export const CardWithoutLogo = ({
   description,
   favorite,
   released: release,
-  developmentTeam: developedBy,
+  developers: developedBy,
 }: GameCardProps) => {
   const favImgRoute = favorite
     ? "/assets/Activated-favs.svg"

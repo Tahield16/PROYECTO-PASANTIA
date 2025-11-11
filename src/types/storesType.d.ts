@@ -10,4 +10,4 @@ export interface Store {
     image_background: string;
   };
 }
-export type Stores=Store[];
+export type StoreList= Store[];

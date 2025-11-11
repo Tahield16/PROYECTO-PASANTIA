@@ -1,10 +1,10 @@
 import { FiltersContainer } from "../Filters/FiltersContainer";
 import { GameCardLink } from "../CardGame/CardLink/GameCardLink";
-import { useGamesMockedStore } from "../../store/gamesStore";
+import { useGamesStore } from "../../store/gamesStoreApi";
 import styles from "./Favorites.module.scss";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
 const Favorites = () => {
-  const { games } = useGamesMockedStore();
+  const { games } = useGamesStore();
   const favoritesGames = games.filter((game) => game.favorite);
   return (
     <main className={styles.favoritesContainer}>
@@ -16,7 +16,7 @@ const Favorites = () => {
       <FiltersContainer />
       <section className={styles.gamesContainer}>
         {favoritesGames.map((game) => (
-          <GameCardLink key={game._id} {...game} />
+          <GameCardLink key={game.id} {...game} />
         ))}
       </section>
     </main>
