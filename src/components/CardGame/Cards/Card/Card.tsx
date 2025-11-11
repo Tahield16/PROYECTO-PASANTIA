@@ -57,7 +57,7 @@ export const Card = ({
           ))}
         </div>
         <div className={styles.genresContainer}>
-          {tags?.map((tag) => (
+          {tags?.slice(0,5).map((tag) => (
             <div className={styles.genreWrapper} key={`${id}-${tag.slug}`}>
               <span>{tag.slug}</span>
             </div>

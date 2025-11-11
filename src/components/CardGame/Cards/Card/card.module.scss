@@ -2,6 +2,8 @@
 @use '../../../../styles/_mixins' as m;
 .cardContainer{
    @include m.card-container-style;
+   height:600px;
+//    overflow-y: scroll;
 }
 .favContainer{
     width:calc(100% - 2rem);
