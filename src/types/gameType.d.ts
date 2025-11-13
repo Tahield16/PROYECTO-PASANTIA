@@ -29,6 +29,7 @@ export interface Game {
   shortScreenshots?: Screenshots;
   ratings?: ratings;
 }
+
 export type FilterGameList = {
   page: number;
   pageSize: number;
@@ -39,6 +40,5 @@ export type FilterGameList = {
   source?: "API" | "DATABASE" | "ALL";
   search?: string; // search text
   ordering?: string;
-  releaseFrom?: string;
-  releaseTo?: string;
+  dates?:{releaseFrom?:string,releaseTo?:string}
 };

@@ -1,5 +1,6 @@
 import type { FilterGameList, Game } from "../../types/gameType";
 import { axiosInstance } from "./axiosInstance";
+import { verifyDates } from "../../utils/verifyDates";
 export interface GamesResponse {
   results: Game[];
   seo_title: string;
@@ -13,17 +14,16 @@ export interface GamesResponse {
   nofollow_collections: string[];
 }
 
-const getGames = (filters: FilterGameList): Promise<GamesResponse> => {
+const getGames = async (filters: FilterGameList): Promise<GamesResponse> => {
+
   console.log(filters);
-  return axiosInstance.get("/games", {
+  
+  return await axiosInstance.get("/games", {
     params: {
       genres: filters.genres?.join(","),
       search: filters?.search,
       page: filters.page,
-      dates:
-        filters.releaseFrom && filters.releaseTo
-          ? `${filters.releaseFrom},${filters.releaseTo}`
-          : undefined,
+      dates: verifyDates(filters.dates),
       page_size: filters.pageSize,
       publishers: filters.publishers?.join(","),
       developers: filters.developmentTeam?.join(","),
@@ -32,12 +32,10 @@ const getGames = (filters: FilterGameList): Promise<GamesResponse> => {
     },
   });
 };
-const getGameById = (id: number):Promise<Game> => {
-  
-    console.log(id);
+const getGameById = (id: number): Promise<Game> => {
+  console.log(id);
 
-    return axiosInstance.get(`/games/${id.toString()}`);
-  
+  return axiosInstance.get(`/games/${id.toString()}`);
 };
 export const ApiService = {
   getGames,

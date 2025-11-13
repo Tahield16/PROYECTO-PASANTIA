@@ -14,19 +14,22 @@ const makeGamesKey = (f?: FilterGameList) => [
   f?.source ?? "",
   f?.search ?? "",
   f?.ordering ?? "",
+  f?.dates?.releaseFrom ?? "",
+  f?.dates?.releaseTo ?? "",
 ];
 
 export const useFetchGameList = () => {
-  const {games, set,filters } = useGamesStore();
-  console.log("Haciendo querie")
+  const { games, set, filters } = useGamesStore();
+  console.log("Haciendo querie");
   const query = useQuery({
     queryKey: makeGamesKey(filters),
     queryFn: () => ApiService.getGames(filters),
     // ...otras opciones...
   });
   useEffect(() => {
+    console.log(query.data);
     if (query.data) {
-      set({ games: [ ...games, ...query.data.results] });
+      set({ games: [...games, ...query.data.results] });
     }
   }, [query.data]);
   return query;

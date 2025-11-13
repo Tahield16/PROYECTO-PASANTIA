@@ -166,20 +166,24 @@ export const FiltersContainer = () => {
       <div className={styles.releaseWrapper}>
         <input
           type="date"
-          value={filters.releaseFrom || ""}
-          onChange={(e) =>
-            set({ filters: { ...filters, releaseFrom: e.target.value } })
-          }
+          value={filters.dates?.releaseFrom || ""}
+          onChange={(e) =>{
+            // Verificar que esten las dos dates en los filtros de fechas antes de limpiar los juegos.
+            clearGames();
+            
+            set({ filters: { ...filters, dates:{...filters.dates,releaseFrom: e.target.value } }})
+          }}
           className={styles.dateInput}
           placeholder="Desde"
         />
 
         <input
           type="date"
-          value={filters.releaseTo || ""}
-          onChange={(e) =>
-            set({ filters: { ...filters, releaseTo: e.target.value } })
-          }
+          value={filters.dates?.releaseTo || ""}
+          onChange={(e) =>{
+            clearGames();
+            set({ filters: { ...filters, dates:{...filters.dates,releaseTo: e.target.value } }})
+          }}
           className={styles.dateInput}
           placeholder="Hasta"
         />
