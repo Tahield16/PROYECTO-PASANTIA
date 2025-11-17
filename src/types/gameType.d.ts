@@ -37,7 +37,7 @@ export type FilterGameList = {
   tags?: number[] | string[]; // ids
   developmentTeam?: number[] | string[];
   publishers?: number[] | string[]; // ids
-  source?: "API" | "DATABASE" | "ALL";
+  source?: "API" | "DATABASE";
   search?: string; // search text
   ordering?: string;
   dates?:{releaseFrom?:string,releaseTo?:string}

@@ -9,9 +9,13 @@ interface GamesState {
   filters: FilterGameList;
   //page_number <- sacarla de filtros
 }
-const initialState={
+const initialState:GamesState={
   games: [],
-  filters: { page: 1, pageSize: 10 }
+  filters: { page: 1, pageSize: 10,source:'API' },
+  set:()=>{},
+  clearGames:()=>{},
+  clearFilters:()=>{}
+
 };
 export const useGamesStore = create<GamesState>()((set) => ({
   ...initialState,
