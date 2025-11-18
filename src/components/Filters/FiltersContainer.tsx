@@ -154,7 +154,7 @@ export const FiltersContainer = () => {
           set({
             filters: {
               ...filters,
-              source: option?.value as "API" | "DATABASE" | "ALL",
+              source: option?.value as "API" | "DATABASE",
             },
           })
         }
