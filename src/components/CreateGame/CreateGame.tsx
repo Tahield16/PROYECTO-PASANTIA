@@ -1,4 +1,3 @@
-import { useGamesMockedStore } from "../../store/gamesStore";
 import { useState } from "react";
 import type { Game } from "../../types/gameType";
 import { GamesForm } from "../GamesForm/GamesForm";
@@ -8,7 +7,8 @@ import styles from "./CreateGame.module.scss";
 
 type GamesCardProps = Partial<Game>;
 export const CreateGame = () => {
-  const { games } = useGamesMockedStore();
+ 
+
   const [selectedGame, setSelectedGame] = useState<
     GamesCardProps | undefined
   >();
@@ -24,6 +24,7 @@ export const CreateGame = () => {
         <GamesForm
           setSelectedGame={setSelectedGame}
           selectedGame={selectedGame}
+          
         />
       </div>
       <div>
