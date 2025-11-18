@@ -3,6 +3,8 @@ import { CustomListbox } from "../CustomListbox/CustomListbox";
 import type { Game } from "../../types/gameType";
 import type { Option, OptionGroup } from "../../types/listboxOptionType";
 import styles from "./GamesForm.module.scss";
+import { useCreateGame } from "../../hooks/useCreateGameServer";
+import { useEditGameServer } from "../../hooks/useEditGameServer";
 
 type GamesFormProps = {
   selectedGame: Partial<Game> | undefined;
@@ -13,6 +15,7 @@ type GamesFormProps = {
   allPublishers?: OptionGroup[];
   allStores?: OptionGroup[];
   allTags?: OptionGroup[];
+  isEdit?: boolean;
 };
 const mockGenres: OptionGroup[] = [
   {
@@ -93,12 +96,30 @@ export const GamesForm = ({
   allPublishers = mockPublishers,
   allStores = mockStores,
   allTags = mockTags,
+  isEdit = false,
 }: GamesFormProps) => {
+  const mutationCreate = useCreateGame();
+  const mutationEdit = useEditGameServer();
+
   const [formData, setFormData] = useState<Partial<Game>>(selectedGame || {});
 
   useEffect(() => {
     setFormData(selectedGame || {});
   }, [selectedGame]);
+
+  useEffect(() => {
+    console.log({ formData });
+  }, [formData]);
+  const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log({ formData });
+    console.log(isEdit);
+    if (isEdit) {
+      mutationEdit.mutate(formData);
+    } else {
+      mutationCreate.mutate(formData);
+    }
+  };
 
   const handleChange = (field: keyof Game, value: any) => {
     // Si el valor es un array (por ejemplo, plataformas, géneros, tags, etc.)
@@ -117,16 +138,9 @@ export const GamesForm = ({
       name: opt.label,
       slug: opt.label,
     }));
-  // // 🔹 Props del formulario
-  // interface GamesFormProps {
-  //   selectedGame?: Partial<Game>;
-  //   setSelectedGame: React.Dispatch<
-  //     React.SetStateAction<Partial<Game> | undefined>
-  //   >;
-  // }
 
   return (
-    <form className={styles.formContainer}>
+    <form onSubmit={(e) => handleSumbit(e)} className={styles.formContainer}>
       <h2 className={styles.formTitle}>Formulario de Juegos</h2>
 
       {/* Nombre */}
@@ -349,6 +363,7 @@ export const GamesForm = ({
           />
         </label>
       </fieldset>
+      <button type="submit">Guardar cambios</button>
     </form>
   );
 };
