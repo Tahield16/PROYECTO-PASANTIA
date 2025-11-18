@@ -1,4 +1,4 @@
-import { useGamesMockedStore } from "../../store/gamesStore";
+import { useGamesStore } from "../../store/gamesStoreApi";
 import { useState } from "react";
 import type { Game } from "../../types/gameType";
 import { GamesForm } from "../GamesForm/GamesForm";
@@ -10,9 +10,9 @@ interface EditGameProps {
 }
 type GamesCardProps = Partial<Game>;
 export const EditGame = ({ _id }: EditGameProps) => {
-  const { games } = useGamesMockedStore();
+  const { games } = useGamesStore();
   const [selectedGame, setSelectedGame] = useState<GamesCardProps | undefined>(
-    () => games.find((g) => g._id === _id)
+    () => games.find((g) => g.id === _id)
   );
   console.log(selectedGame);
   return (
@@ -26,6 +26,7 @@ export const EditGame = ({ _id }: EditGameProps) => {
         <GamesForm
           setSelectedGame={setSelectedGame}
           selectedGame={selectedGame}
+          isEdit={true}
         />
       </div>
       <div>
