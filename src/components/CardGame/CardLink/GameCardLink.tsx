@@ -11,7 +11,6 @@ export const GameCardLink = (game: Game) => {
           id={id}
           name={game.name}
           background_image={game.background_image}
-          // description={game.description} Eliminarlo de las cards, pq la api no lo trae en /games
           genres={game.genres}
           tags={game.tags}
           favorite={game.favorite}
@@ -20,16 +19,20 @@ export const GameCardLink = (game: Game) => {
           released={game.released}
         />
       </Link>
-      <Link
-        to="/$gameId/edit"
-        params={{ gameId: String(id) }}
-        className={styles.editLink}
-      >
-        <img
-          src="/assets/edit-3-svgrepo-com.svg"
-          alt="Edit logo, click it to edit this game."
-        />
-      </Link>
+      {game.source == "DATABASE" ? (
+        <Link
+          to="/$gameId/edit"
+          params={{ gameId: String(id) }}
+          className={styles.editLink}
+        >
+          <img
+            src="/assets/edit-3-svgrepo-com.svg"
+            alt="Edit logo, click it to edit this game."
+          />
+        </Link>
+      ) : (
+        <></>
+      )}
     </article>
   );
 };

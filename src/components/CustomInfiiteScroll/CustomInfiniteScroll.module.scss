@@ -1,0 +1,12 @@
+.gamesContainer {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+  min-height: 300px;
+  // Máximo 4 columnas, pero responsive
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  // Asegura que no se estire raro en pantallas grandes
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+}

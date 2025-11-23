@@ -1,22 +1,26 @@
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useFetchGameList } from "../../hooks/useFetchGames";
+import { useFetchGameList as useFetchGamesServer } from "../../hooks/useFetchGamesServer";
+import { useGamesServerStore } from "../../store/gamesServerStore";
 import { useGamesStore } from "../../store/gamesStoreApi";
-import { GameCardLink } from "../CardGame/CardLink/GameCardLink";
+import { CustomInfiniteScroll } from "../CustomInfiiteScroll/CustomInfiniteScroll";
 import { FiltersContainer } from "../Filters/FiltersContainer";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
 import styles from "./Landing.module.scss";
-import { Spinner } from "../Spinner/Spinner";
 const Landing = () => {
   const { games, filters, set } = useGamesStore();
+  const { gamesServer, filtersServer, setServer, hasMore } = useGamesServerStore();
 
   const fetch = useFetchGameList();
-
-  console.log({ data: fetch.data });
-  console.log({ games });
+  const fetchServer = useFetchGamesServer();
+  // console.log({ data: fetch.data });
+  // console.log({ games });
+  console.log({ "Server data": fetchServer.data });
   const fetchNextGameList = () => {
     set({ filters: { ...filters, page: filters.page + 1 } });
   };
-
+  const fetchNextServerGameList = () => {
+    setServer({ filtersServer: { ...filtersServer, page: filtersServer.page + 1 } });
+  };
   return (
     <main className={styles.landingContainer}>
       <TitleTextContainer
@@ -28,22 +32,21 @@ const Landing = () => {
       <FiltersContainer />
 
       <section className={styles.gamesContainer}>
-        {games.length > 0 ? (
-          <InfiniteScroll
-            dataLength={games.length}
-            next={fetchNextGameList}
+        {filters.source == "API" && (
+          <CustomInfiniteScroll
+            games={games}
             hasMore={true}
-            loader={<h4>Cargando nuevos juegos...</h4>}
-            className={styles.gamesContainer}
-          >
-            {games.map((game) => (
-              <GameCardLink key={game.id} {...game} />
-            ))}
-          </InfiniteScroll>
-        ) : fetch.isLoading ? (
-          <Spinner message={"Cargando juegos"} />
-        ) : (
-          <p>No se han encontrado juegos.</p>
+            isLoading={fetch.isLoading}
+            nextFn={fetchNextGameList}
+          />
+        )}
+        {filters.source =="DATABASE" &&(
+          <CustomInfiniteScroll
+          games={gamesServer}
+          hasMore={hasMore}
+          isLoading={fetchServer.isLoading}
+          nextFn={fetchNextServerGameList}
+           />
         )}
       </section>
     </main>
