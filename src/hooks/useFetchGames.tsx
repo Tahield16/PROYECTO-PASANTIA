@@ -28,7 +28,7 @@ export const useFetchGameList = () => {
   });
   useEffect(() => {
     console.log(query.data);
-    if (query.data) {
+    if (query.data && !query.error) {
       set({ games: [...games, ...query.data.results] });
     }
   }, [query.data]);
