@@ -1,5 +1,6 @@
 import { useFetchGameList } from "../../hooks/useFetchGames";
 import { useFetchGameList as useFetchGamesServer } from "../../hooks/useFetchGamesServer";
+import { useFetchGenres } from "../../hooks/useFetchGenres";
 import { useGamesServerStore } from "../../store/gamesServerStore";
 import { useGamesStore } from "../../store/gamesStoreApi";
 import { CustomInfiniteScroll } from "../CustomInfiiteScroll/CustomInfiniteScroll";
@@ -9,11 +10,12 @@ import styles from "./Landing.module.scss";
 const Landing = () => {
   const { games, filters, set } = useGamesStore();
   const { gamesServer, filtersServer, setServer, hasMore } = useGamesServerStore();
-
+  const fetchGenreList=useFetchGenres();
   const fetch = useFetchGameList();
   const fetchServer = useFetchGamesServer();
   // console.log({ data: fetch.data });
   // console.log({ games });
+  console.log({"Generos":fetchGenreList});
   console.log({ "Server data": fetchServer.data });
   const fetchNextGameList = () => {
     set({ filters: { ...filters, page: filters.page + 1 } });

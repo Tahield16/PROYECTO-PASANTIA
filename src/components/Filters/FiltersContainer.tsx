@@ -10,6 +10,7 @@ import type {
 import { CustomCombobox } from "../CustomCombobox/CustomCombobox";
 import { CustomListbox } from "../CustomListbox/CustomListbox";
 import styles from "./FiltersContainer.module.scss";
+import { useGenreStore } from "../../store/genresStore";
 
 const OrderByOptions: OptionsArrayList = [
   {
@@ -56,17 +57,9 @@ const mockGames: OptionsArrayCombo = [
   { id: 4, name: "Cyberpunk 2077", logo: "https://placehold.co/40x40?text=CP" },
 ];
 
-const mockGenres: OptionsArrayCombo = [
-  { id: "rpg", name: "RPG" },
-  { id: "action", name: "Action" },
-  { id: "adventure", name: "Adventure" },
-  { id: "platformer", name: "Platformer" },
-  { id: "indie", name: "Indie" },
-];
-
 export const FiltersContainer = () => {
   const { filters, set, clearFilters, clearGames } = useGamesStore();
-
+  const { genres } = useGenreStore();
   return (
     <section className={styles.filtersContainer}>
       <button
@@ -123,7 +116,7 @@ export const FiltersContainer = () => {
           });
         }}
         className="dark"
-        options={mockGenres}
+        options={genres}
         placeholder="Filtrar por generos"
       />
       <CustomCombobox
@@ -135,7 +128,7 @@ export const FiltersContainer = () => {
             : null
         }
         onChange={(option: OptionCombo | null) => {
-          clearGames()
+          clearGames();
           set({
             filters: { ...filters, tags: option ? [String(option.id)] : [] },
           });
@@ -167,11 +160,16 @@ export const FiltersContainer = () => {
         <input
           type="date"
           value={filters.dates?.releaseFrom || ""}
-          onChange={(e) =>{
+          onChange={(e) => {
             // Verificar que esten las dos dates en los filtros de fechas antes de limpiar los juegos.
             clearGames();
-            
-            set({ filters: { ...filters, dates:{...filters.dates,releaseFrom: e.target.value } }})
+
+            set({
+              filters: {
+                ...filters,
+                dates: { ...filters.dates, releaseFrom: e.target.value },
+              },
+            });
           }}
           className={styles.dateInput}
           placeholder="Desde"
@@ -180,9 +178,14 @@ export const FiltersContainer = () => {
         <input
           type="date"
           value={filters.dates?.releaseTo || ""}
-          onChange={(e) =>{
+          onChange={(e) => {
             clearGames();
-            set({ filters: { ...filters, dates:{...filters.dates,releaseTo: e.target.value } }})
+            set({
+              filters: {
+                ...filters,
+                dates: { ...filters.dates, releaseTo: e.target.value },
+              },
+            });
           }}
           className={styles.dateInput}
           placeholder="Hasta"

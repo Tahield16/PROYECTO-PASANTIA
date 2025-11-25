@@ -2,6 +2,7 @@ import type { FilterGameList, Game } from "../../types/gameType";
 import { axiosInstance } from "./axiosInstance";
 import { verifyDates } from "../../utils/verifyDates";
 import type { GamesResponse } from "../../types/gamesAPIResponse";
+import type { GenreApiResponse } from "../../types/genreType";
 
 const getGames = async (filters: FilterGameList): Promise<GamesResponse> => {
 
@@ -26,7 +27,11 @@ const getGameById = (id: number): Promise<Game> => {
 
   return axiosInstance.get(`/games/${id.toString()}`);
 };
+const getGenres=():Promise<GenreApiResponse>=>{
+  return axiosInstance.get('/genres');
+}
 export const ApiService = {
   getGames,
   getGameById,
+  getGenres
 };
