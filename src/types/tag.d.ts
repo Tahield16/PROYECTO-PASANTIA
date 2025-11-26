@@ -1,6 +1,12 @@
-export interface Tag {
-  id: number;
-  name: string;
-  slug: string;
+import type { Slug } from "./slugType";
+import type { Game } from "./gameType";
+export interface Tag extends Slug {
+  games:Game[];
+  language:string;
 }
-export type Tags = Tag[];
+interface TagResponse{
+    next:string;
+    prev:string;
+    count:number;
+    results:Tag[];
+}

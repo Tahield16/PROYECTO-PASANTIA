@@ -1,9 +1,9 @@
-import { Genres } from "./genreType";
+import { Genre } from "./genreType";
 import { Tag } from "./tag";
 import { Requirement } from "./requirements";
 import { Platforms } from "./platform";
 import type { Screenshots } from "./shortScreenshots";
-import type { StoreList } from "./storesType";
+import type { Store, StoreList } from "./storesType";
 import type { ratings } from "./note";
 import type { Slug } from "./slugType";
 import type { Platform } from "./platformType";
@@ -17,14 +17,14 @@ export interface Game {
   rating: number; // promedio de rating
   background_image: string | undefined; // background_image
   background_image_additional:string | undefined;
-  genres: Slug[]; // relación con Genre tipado abajo
+  genres: Genre[]; // relación con Genre tipado abajo
   favorite: boolean; // flag manual
   source: "API" | "DATABASE"; // de dónde viene
   developers: Slug[]; // developers
   platforms: Platform[]; // plataformas disponibles
   requirements?: Requirement;
-  stores?: StoreList;
-  tags?: Slug[];
+  stores?: Store[];
+  tags?: Tag[];
   publishers?: Slug[];
   shortScreenshots?: Screenshots;
   ratings?: ratings;

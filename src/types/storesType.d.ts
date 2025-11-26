@@ -1,4 +1,10 @@
-export interface Store {
+import type { Game } from "./gameType";
+import { Slug } from "./slugType";
+export interface Store extends Slug{
+  games:Game[];
+  domain:string
+}
+export interface StoreGameDetail {
   id: number;
   url: string;
   store: {
@@ -10,4 +16,3 @@ export interface Store {
     image_background: string;
   };
 }
-export type StoreList= Store[];
