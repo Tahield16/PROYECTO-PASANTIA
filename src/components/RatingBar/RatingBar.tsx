@@ -3,7 +3,7 @@ import styles from "./RatingBar.module.scss";
 type RatingsProps = { ratings?: ratings };
 export const RatingBar = ({ ratings }: RatingsProps) => {
   if (!ratings || ratings.length<=0) return <></>  
-  console.log(ratings)
+
   return (
     <div className={styles.ratingBarContainer}>
       <div className={styles.bar}>

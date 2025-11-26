@@ -13,14 +13,13 @@ export const axiosInstance=axios.create({
 
 axiosInstance.interceptors.response.use(
     (response) => {
-        console.log(`JSON SERVER: ${response.status} ${response.statusText}`);
         return response.data;
     },
 );
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        console.log(`JSON SERVER: ${config.method?.toUpperCase()} ${config.url}`);
+        
         return config;
     },
 );

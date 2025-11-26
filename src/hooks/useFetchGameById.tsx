@@ -10,7 +10,7 @@ export const useFetchGameById = (id: number) => {
     queryFn: () => ApiService.getGameById(id),
   });
   useEffect(() => {
-    console.log(query.data);
+    
     if (query?.data) {
       set({ game: query.data });
     }

@@ -9,9 +9,7 @@ export const useFetchGenres = () => {
     queryFn: ApiService.getGenres,
   });
   useEffect(() => {
-    console.log(query.data);
     if (query.data) {
-      console.log(`generos desde la API: ${query.data.results}`);
       set({ genres: query.data.results });
     }
   }, [query.data]);

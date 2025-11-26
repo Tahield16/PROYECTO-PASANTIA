@@ -14,7 +14,7 @@ export const EditGame = ({ _id }: EditGameProps) => {
   const [selectedGame, setSelectedGame] = useState<GamesCardProps | undefined>(
     () => games.find((g) => g.id === _id)
   );
-  console.log(selectedGame);
+
   return (
     <main className={styles.editGameContainer}>
       <div className="formContainer">

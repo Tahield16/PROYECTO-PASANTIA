@@ -28,13 +28,13 @@ export const useFetchGameList = () => {
   const { gamesServer, filtersServer, setServer } = useGamesServerStore();
   const query = useQuery({
     queryKey: makeGamesKey(filtersServer),
-    queryFn: () => ServerService.fetchGameList(filtersServer.page,filtersServer.pageSize),
+    queryFn: () => ServerService.fetchGameList(filtersServer.page),
   });
   useEffect(() => {
-    console.log(query.data);
+    
     if (query.data) {
       setServer({ gamesServer: [...gamesServer, ...query.data.data],hasMore:query.data.next!==null });
-      console.log(query.data)
+      
     }
   }, [query.data]);
   return query;
