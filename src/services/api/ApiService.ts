@@ -1,13 +1,12 @@
-import type { FilterGameList, Game } from "../../types/gameType";
-import { axiosInstance } from "./axiosInstance";
-import { verifyDates } from "../../utils/verifyDates";
 import type { GamesResponse } from "../../types/gamesAPIResponse";
+import type { FilterGameList, Game } from "../../types/gameType";
 import type { GenreApiResponse } from "../../types/genreType";
+import type { PlatformResponse } from "../../types/platformType";
+import type { TagResponse } from "../../types/tag";
+import { verifyDates } from "../../utils/verifyDates";
+import { axiosInstance } from "./axiosInstance";
 
 const getGames = async (filters: FilterGameList): Promise<GamesResponse> => {
-
-  console.log(filters);
-  
   return await axiosInstance.get("/games", {
     params: {
       genres: filters.genres?.join(","),
@@ -23,15 +22,23 @@ const getGames = async (filters: FilterGameList): Promise<GamesResponse> => {
   });
 };
 const getGameById = (id: number): Promise<Game> => {
-  console.log(id);
-
   return axiosInstance.get(`/games/${id.toString()}`);
 };
-const getGenres=():Promise<GenreApiResponse>=>{
-  return axiosInstance.get('/genres');
-}
+const getGenres = (): Promise<GenreApiResponse> => {
+  return axiosInstance.get("/genres");
+};
+const getTags = (): Promise<TagResponse> => {
+  return axiosInstance.get("/tags");
+};
+const getPlatforms = (): Promise<PlatformResponse> => {
+  return axiosInstance.get("/platforms").then((r) => {
+    return r as unknown as PlatformResponse;
+  });
+};
 export const ApiService = {
   getGames,
   getGameById,
-  getGenres
+  getGenres,
+  getTags,
+  getPlatforms,
 };

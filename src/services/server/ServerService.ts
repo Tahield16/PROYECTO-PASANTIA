@@ -3,7 +3,10 @@ import type { serverGamesResponse } from "../../types/serverGamesResponse";
 import { axiosInstance } from "./serverAxiosInstance";
 
 const searchGame = async (id: Game["id"]): Promise<Game> => {
-  return axiosInstance.get(`/games/${id}`).then((r) => r.data);
+  return axiosInstance.get(`/games/${id}`).then((r) => {
+
+    return r as unknown as Game;
+  });
 };
 
 const createGame = async (game: Partial<Game>): Promise<Game> => {
@@ -26,14 +29,14 @@ const editGame = async (game: Partial<Game>): Promise<Game> => {
   }
 };
 
-const fetchGameList = async (page: number, pageSize: number): Promise<serverGamesResponse> => {
-  console.log("FETCH list page:", page, "pageSize:", pageSize);
-  return axiosInstance
-    .get("/games", {
-      params: {
-        _page: page,
-      },
-    })
+const fetchGameList = async (
+  page: number,
+): Promise<serverGamesResponse> => {
+  return axiosInstance.get("/games", {
+    params: {
+      _page: page,
+    },
+  });
 };
 
 export const ServerService = {
