@@ -1,9 +1,9 @@
 {
   "games": [
     {
-      "id": "2bde",
+      "id": "1",
       "name": "Juego 2",
-      "description": "kjdfañfañklj",
+      "description_raw": "kjdfañfañklj",
       "background_image": "https://preview.redd.it/goku-hands-you-a-job-application-v0-fi4p7gva9ybf1.jpeg?auto=webp&s=2f80caacd4594cecd14ea788cebc5da7db37549e",
       "released": "2025-11-17",
       "rating": 5,
@@ -11,9 +11,9 @@
       "source": "DATABASE"
     },
     {
-      "id": "6137",
+      "id": 2,
       "name": "Juego 54",
-      "description": "Aura",
+      "description_raw": "Aura",
       "released": "2025-11-29",
       "rating": 5,
       "tba": true,
@@ -28,9 +28,9 @@
       ]
     },
     {
-      "id": "2",
+      "id": 3,
       "name": "Juego 55q",
-      "description": "Auraasajkfsadlñkjfadsñkfjs",
+      "description_raw": "Auraasajkfsadlñkjfadsñkfjs",
       "released": "2025-11-29",
       "rating": 5,
       "tba": true,
@@ -45,141 +45,9 @@
       ]
     },
     {
-      "id": "2bdaef",
-      "name": "Juego 2",
-      "description": "kjdfañfañklj",
-      "background_image": "https://preview.redd.it/goku-hands-you-a-job-application-v0-fi4p7gva9ybf1.jpeg?auto=webp&s=2f80caacd4594cecd14ea788cebc5da7db37549e",
-      "released": "2025-11-17",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE"
-    },
-    {
-      "id": "6137aa",
-      "name": "Juego 54",
-      "description": "Aura",
-      "released": "2025-11-29",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "genres": [
-        {
-          "id": null,
-          "name": "Acción",
-          "slug": "Acción"
-        }
-      ]
-    },
-    {
-      "id": "277122",
-      "name": "Juego 55q",
-      "description": "Auraasajkfsadlñkjfadsñkfjs",
-      "released": "2025-11-29",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "genres": [
-        {
-          "id": null,
-          "name": "Acción",
-          "slug": "Acción"
-        }
-      ]
-    },
-    {
-      "id": "2bde",
-      "name": "Juego 2",
-      "description": "kjdfañfañklj",
-      "background_image": "https://preview.redd.it/goku-hands-you-a-job-application-v0-fi4p7gva9ybf1.jpeg?auto=webp&s=2f80caacd4594cecd14ea788cebc5da7db37549e",
-      "released": "2025-11-17",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE"
-    },
-    {
-      "id": "6137",
-      "name": "Juego 54",
-      "description": "Aura",
-      "released": "2025-11-29",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "genres": [
-        {
-          "id": null,
-          "name": "Acción",
-          "slug": "Acción"
-        }
-      ]
-    },
-    {
-      "id": "2771a",
-      "name": "Juego 55q",
-      "description": "Auraasajkfsadlñkjfadsñkfjs",
-      "released": "2025-11-29",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "genres": [
-        {
-          "id": null,
-          "name": "Acción",
-          "slug": "Acción"
-        }
-      ]
-    },
-    {
-      "id": "2bde",
-      "name": "Juego 2",
-      "description": "kjdfañfañklj",
-      "background_image": "https://preview.redd.it/goku-hands-you-a-job-application-v0-fi4p7gva9ybf1.jpeg?auto=webp&s=2f80caacd4594cecd14ea788cebc5da7db37549e",
-      "released": "2025-11-17",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE"
-    },
-    {
-      "id": "6137",
-      "name": "Juego 54",
-      "description": "Aura",
-      "released": "2025-11-29",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "genres": [
-        {
-          "id": null,
-          "name": "Acción",
-          "slug": "Acción"
-        }
-      ]
-    },
-    {
-      "id": "2771",
-      "name": "Juego 55q",
-      "description": "Auraasajkfsadlñkjfadsñkfjs",
-      "released": "2025-11-29",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "genres": [
-        {
-          "id": null,
-          "name": "Acción",
-          "slug": "Acción"
-        }
-      ]
-    },
-    {
-      "id": "2e87",
+      "id": 4,
       "name": "Tralalero",
-      "description": "porcualero",
+      "description_raw": "porcualero",
       "released": "2025-11-20",
       "rating": 5,
       "tba": true,
@@ -190,20 +58,7 @@
       }
     },
     {
-      "id": "1844",
-      "name": "Tralalero",
-      "description": "porcualero",
-      "released": "2025-11-20",
-      "rating": 5,
-      "tba": true,
-      "source": "DATABASE",
-      "favorite": true,
-      "requirements": {
-        "minimum": "Ser gamer"
-      }
-    },
-    {
-      "id": "2e49",
+      "id": 5,
       "tags": [
         {
           "id": null,
@@ -214,22 +69,12 @@
           "id": null,
           "name": "Indie",
           "slug": "Indie"
-        },
-        {
-          "id": null,
-          "name": "Indie",
-          "slug": "Indie"
-        },
-        {
-          "id": null,
-          "name": "Indie",
-          "slug": "Indie"
         }
       ],
       "tba": true,
       "favorite": true,
       "name": "juegazo",
-      "description": "juegarral",
+      "description_raw": "juegarral",
       "released": "2025-11-18",
       "rating": 5,
       "genres": [
@@ -255,6 +100,69 @@
           "name": "Rockstar",
           "slug": "Rockstar"
         }
+      ]
+    },
+
+    {
+      "id": 6,
+      "name": "Cyber Clash Arena",
+      "description_raw": "Un shooter futurista donde equipos de 3 se enfrentan en arenas de neón.",
+      "released": "2025-12-10",
+      "rating": 4.6,
+      "tba": false,
+      "source": "DATABASE",
+      "favorite": false,
+      "genres": [
+        { "id": null, "name": "Acción", "slug": "accion" },
+        { "id": null, "name": "Shooter", "slug": "shooter" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Mystic Valley",
+      "description_raw": "RPG relajado con exploración de bosques encantados y criaturas mágicas.",
+      "released": "2025-10-01",
+      "rating": 4.8,
+      "tba": false,
+      "source": "DATABASE",
+      "favorite": true,
+      "genres": [
+        { "id": null, "name": "RPG", "slug": "rpg" },
+        { "id": null, "name": "Aventura", "slug": "aventura" }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Circuit Breach",
+      "description_raw": "Juego de estrategia donde hackeás nodos en una megared corporativa.",
+      "released": "2025-09-22",
+      "rating": 4.3,
+      "tba": false,
+      "source": "DATABASE",
+      "genres": [{ "id": null, "name": "Estrategia", "slug": "estrategia" }]
+    },
+    {
+      "id": 9,
+      "name": "Sky Drifters",
+      "description_raw": "Carreras aéreas en ciudades flotantes con vehículos personalizables.",
+      "released": "2026-01-12",
+      "rating": 4.9,
+      "tba": false,
+      "source": "DATABASE",
+      "favorite": false,
+      "genres": [{ "id": null, "name": "Carreras", "slug": "carreras" }]
+    },
+    {
+      "id": 10,
+      "name": "Voxel Frontier",
+      "description_raw": "Construcción y supervivencia en un planeta nuevo lleno de recursos alienígenas.",
+      "released": "2026-02-20",
+      "rating": 4.7,
+      "tba": false,
+      "source": "DATABASE",
+      "genres": [
+        { "id": null, "name": "Supervivencia", "slug": "supervivencia" },
+        { "id": null, "name": "Sandbox", "slug": "sandbox" }
       ]
     }
   ]
