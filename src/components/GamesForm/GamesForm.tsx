@@ -5,6 +5,9 @@ import type { Option, OptionGroup } from "../../types/listboxOptionType";
 import styles from "./GamesForm.module.scss";
 import { useCreateGame } from "../../hooks/useCreateGameServer";
 import { useEditGameServer } from "../../hooks/useEditGameServer";
+import { useGenreStore } from "../../store/genresStore";
+import { useTagsStore } from "../../store/tagsStore";
+import { usePlatformStore } from "../../store/platformsStore";
 
 type GamesFormProps = {
   selectedGame: Partial<Game> | undefined;
@@ -17,27 +20,6 @@ type GamesFormProps = {
   allTags?: OptionGroup[];
   isEdit?: boolean;
 };
-const mockGenres: OptionGroup[] = [
-  {
-    label: "Géneros",
-    optionItems: [
-      { label: "Acción", value: "accion" },
-      { label: "Aventura", value: "aventura" },
-      { label: "Estrategia", value: "estrategia" },
-    ],
-  },
-];
-
-const mockPlatforms: OptionGroup[] = [
-  {
-    label: "Plataformas",
-    optionItems: [
-      { label: "PC", value: "pc" },
-      { label: "PlayStation", value: "playstation" },
-      { label: "Xbox", value: "xbox" },
-    ],
-  },
-];
 
 const mockDevelopers: OptionGroup[] = [
   {
@@ -69,51 +51,51 @@ const mockStores: OptionGroup[] = [
   },
 ];
 
-const mockTags: OptionGroup[] = [
-  {
-    label: "Tags",
-    optionItems: [
-      { label: "Multiplayer", value: "multiplayer" },
-      { label: "Indie", value: "indie" },
-    ],
-  },
-];
-const mockSource: OptionGroup[] = [
-  {
-    label: "Origen",
-    optionItems: [
-      { label: "API", value: "API" },
-      { label: "DATABASE", value: "DATABASE" },
-    ],
-  },
-];
+
+const createOptionGroup=(optionsArray:any[],labelValue:string)=>{
+
+  return [{
+    label:labelValue,
+    optionItems:optionsArray
+  }]
+}
 export const GamesForm = ({
   selectedGame,
   setSelectedGame,
-  allGenres = mockGenres,
-  allPlatforms = mockPlatforms,
-  allDevelopers = mockDevelopers,
+  allDevelopers=mockDevelopers,
   allPublishers = mockPublishers,
   allStores = mockStores,
-  allTags = mockTags,
+  
   isEdit = false,
 }: GamesFormProps) => {
   const mutationCreate = useCreateGame();
   const mutationEdit = useEditGameServer();
-
+  const { genres } = useGenreStore();
+  const { tags } = useTagsStore();
+  const { platforms } = usePlatformStore();
   const [formData, setFormData] = useState<Partial<Game>>(selectedGame || {});
-
+  const genresOption = genres.map((g) => ({
+    label: g.slug,
+    value: g.name,
+  }));
+  const tagsOption=tags.map((t)=>({
+    label:t.name,
+    value:t.slug
+  }))
+  const platformsOption=platforms.map((p)=>({
+    label:p.name,
+    value:p.slug
+  }))
+  
+ 
   useEffect(() => {
     setFormData(selectedGame || {});
   }, [selectedGame]);
 
-  useEffect(() => {
-    console.log({ formData });
-  }, [formData]);
+
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ formData });
-    console.log(isEdit);
+  
     if (isEdit) {
       mutationEdit.mutate(formData);
     } else {
@@ -161,8 +143,8 @@ export const GamesForm = ({
           Descripción:
           <textarea
             className={styles.textarea}
-            value={formData.description || ""}
-            onChange={(e) => handleChange("description", e.target.value)}
+            value={formData.description_raw || ""}
+            onChange={(e) => handleChange("description_raw", e.target.value)}
           />
         </label>
       </div>
@@ -214,24 +196,6 @@ export const GamesForm = ({
         />
       </label>
 
-      {/* Fuente */}
-      <label>
-        Fuente:
-        <CustomListbox
-          placeholder="Origen"
-          options={mockSource}
-          isMultiple={false}
-          value={
-            formData.source != null
-              ? {
-                  label: formData.source.toString(),
-                  value: formData.source.toString(),
-                }
-              : null
-          }
-          onChange={(e) => handleChange("source", e?.label)}
-        />
-      </label>
 
       {/* Favorito */}
       <label>
@@ -249,11 +213,11 @@ export const GamesForm = ({
         isMultiple={true}
         value={
           formData.genres?.map((g) => ({
-            label: g.name,
-            value: g.slug,
+            label: g?.name,
+            value: g?.slug,
           })) || []
         }
-        options={allGenres}
+        options={createOptionGroup(genresOption,"Generos:")}
         onChange={(val) => handleChange("genres", normalizeOptionsToSlugs(val))}
       />
 
@@ -263,11 +227,11 @@ export const GamesForm = ({
         isMultiple={true}
         value={
           formData.platforms?.map((p) => ({
-            label: p.platform.name,
-            value: p.platform.slug,
+            label: p?.name,
+            value: p?.slug,
           })) || []
         }
-        options={allPlatforms}
+        options={createOptionGroup(platformsOption,"Plataformas: ")}
         onChange={(val) =>
           handleChange("platforms", normalizeOptionsToSlugs(val))
         }
@@ -307,7 +271,7 @@ export const GamesForm = ({
 
       {/* STORES */}
       <CustomListbox
-        placeholder="Plataformas"
+        placeholder="Tiendas"
         isMultiple={true}
         value={
           formData.stores?.map((s) => ({
@@ -321,15 +285,15 @@ export const GamesForm = ({
 
       {/* TAGS */}
       <CustomListbox
-        placeholder="Plataformas"
+        placeholder="Etiquetas"
         isMultiple={true}
         value={
           formData.tags?.map((t) => ({
-            label: t.name,
-            value: t.slug,
+            label: t?.name,
+            value: t?.slug,
           })) || []
         }
-        options={allTags}
+        options={createOptionGroup(tagsOption,"Tags:")}
         onChange={(val) => handleChange("tags", normalizeOptionsToSlugs(val))}
       />
 

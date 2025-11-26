@@ -1,16 +1,14 @@
-import { useSelectedGameStore } from "../../store/selectedGameStore";
+import type { Game } from "../../types/gameType";
 import { RatingBar } from "../RatingBar/RatingBar";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
 import styles from "./GameDetails.module.scss";
+interface GameDetailsProps{
+  game: Game | null;
+}
+export const GameDetails = ({game}:GameDetailsProps) => {
 
-export const GameDetails = () => {
 
-  const { game } = useSelectedGameStore();
-
-
-  console.log(game);
-
-    const pcRequirments=game?.platforms?.find((p)=>p.platform.id===4);
+  const pcRequirments = game?.platforms?.find((p) => p.platform.id === 4);
   return (
     <main className={styles.detailsContainer}>
       <div className={styles.centeredContent}>
@@ -35,15 +33,23 @@ export const GameDetails = () => {
             className={styles.mainImg}
           />
           <div className={styles.thumbnailsContainer}>
-           <img src={game?.background_image_additional} alt={`Imagen alternativa de ${game?.name}`} className={styles.screenshot} />
-          <RatingBar ratings={game?.ratings} />
+            <img
+              src={game?.background_image_additional}
+              alt={`Imagen alternativa de ${game?.name}`}
+              className={styles.screenshot}
+            />
+            <RatingBar ratings={game?.ratings} />
           </div>
         </section>
         <section className={styles.ratingGameContainer}>
           <div className={styles.platformsContainer}>
             <p className={styles.textHighlight}>Conseguilo en: </p>
             {game?.stores?.map(({ store }) => (
-              <a href={store.domain} target="_blank" key={`${game.id}-${store.name}`}>
+              <a
+                href={store.domain}
+                target="_blank"
+                key={`${game.id}-${store.name}`}
+              >
                 <div className={styles.platformWrapper}>
                   <img
                     src={store.image_background}
@@ -58,11 +64,11 @@ export const GameDetails = () => {
         </section>
 
         <section className={styles.descriptionWrapper}>
-            <TitleTextContainer
-              title="Acerca de: "
-              highlited={undefined}
-              text={undefined}
-            ></TitleTextContainer>
+          <TitleTextContainer
+            title="Acerca de: "
+            highlited={undefined}
+            text={undefined}
+          ></TitleTextContainer>
           <div className={styles.aboutContent}>
             <p className={styles.gameDescription}>{game?.description_raw}</p>
           </div>
@@ -91,7 +97,7 @@ export const GameDetails = () => {
                 </div>
               ))}
             </div>
-            <div className={`${styles.genresContainer }  ${styles.feature}`}>
+            <div className={`${styles.genresContainer}  ${styles.feature}`}>
               <p>
                 {" "}
                 <span className={styles.textHighlight}>Generos: </span>
@@ -124,19 +130,25 @@ export const GameDetails = () => {
                 {game?.developers?.map((developer, index) => (
                   <span key={index} className={styles.developer}>
                     {developer.slug}
-                    {index < game.developers.length - 1 && <span>,</span>}
+                    {index < (game.developers?.length ?? 0) - 1 && (
+                      <span>,</span>
+                    )}
                   </span>
                 ))}
               </p>
             </div>
           </div>
           <div className={styles.featureItem}>
-            <div className={`${styles.requirementsContainer} ${styles.feature}`}>
+            <div
+              className={`${styles.requirementsContainer} ${styles.feature}`}
+            >
               <p className={`${styles.text} ${styles.requirement}`}>
                 {pcRequirments?.requirements.minimum}
               </p>
             </div>
-            <div className={`${styles.requirementsContainer} ${styles.feature}`}>
+            <div
+              className={`${styles.requirementsContainer} ${styles.feature}`}
+            >
               <p className={styles.requirement}>
                 {pcRequirments?.requirements.recommended}
               </p>

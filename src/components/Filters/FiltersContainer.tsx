@@ -11,7 +11,7 @@ import { CustomCombobox } from "../CustomCombobox/CustomCombobox";
 import { CustomListbox } from "../CustomListbox/CustomListbox";
 import styles from "./FiltersContainer.module.scss";
 import { useGenreStore } from "../../store/genresStore";
-
+import { useTagsStore } from "../../store/tagsStore";
 const OrderByOptions: OptionsArrayList = [
   {
     label: "Alfabeticamente",
@@ -28,14 +28,7 @@ const OrderByOptions: OptionsArrayList = [
     ],
   },
 ];
-export const mockTags: OptionsArrayCombo = [
-  { id: "2", name: "Multiplayer" },
-  { id: "3", name: "History-based" },
-  { id: "4", name: "Horror" },
-  { id: "5", name: "Pixel Art" },
-  { id: "6", name: "Singleplayer" },
-  { id: "7", name: "Multiplayer" },
-];
+
 const filterByOrigin: OptionsArrayList = [
   {
     optionItems: [
@@ -60,6 +53,7 @@ const mockGames: OptionsArrayCombo = [
 export const FiltersContainer = () => {
   const { filters, set, clearFilters, clearGames } = useGamesStore();
   const { genres } = useGenreStore();
+  const { tags } = useTagsStore();
   return (
     <section className={styles.filtersContainer}>
       <button
@@ -111,7 +105,7 @@ export const FiltersContainer = () => {
           set({
             filters: {
               ...filters,
-              genres: option ? [option.id.toString()] : [],
+              genres: option ? [option.name] : [],
             },
           });
         }}
@@ -122,7 +116,7 @@ export const FiltersContainer = () => {
       <CustomCombobox
         value={
           filters.tags && filters.tags.length > 0
-            ? mockTags.find(
+            ? tags.find(
                 (tag) => String(tag.id) === String(filters.tags?.[0])
               ) || null
             : null
@@ -134,7 +128,7 @@ export const FiltersContainer = () => {
           });
         }}
         className="light"
-        options={mockTags}
+        options={tags}
         placeholder="Filtrar por tags"
       />
       <CustomListbox
