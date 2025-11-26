@@ -13,7 +13,7 @@ export const CardForm = ({
   favorite,
   background_image,
   released: release,
-  description,
+  description_raw,
   tags,
   platforms,
   publishers,
@@ -49,7 +49,7 @@ export const CardForm = ({
 
         {rating !== undefined && (
           <p className={styles.rating}>
-            <span className={styles.spnRate}>{rating}</span>/10
+            <span className={styles.spnRate}>{rating}</span>/5
             <img
               src="/assets/Star-icon.svg"
               alt="Estrella de rating"
@@ -166,7 +166,7 @@ export const CardForm = ({
           </div>
         )}
 
-        {description && <p className={styles.description}>{description}</p>}
+        {description_raw && <p className={styles.description}>{description_raw}</p>}
       </div>
     </section>
   );
