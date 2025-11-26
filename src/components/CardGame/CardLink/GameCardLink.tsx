@@ -6,7 +6,7 @@ export const GameCardLink = (game: Game) => {
   const { id } = game;
   return (
     <article className={styles.cardContainer}>
-      <Link to="/$gameId" params={{ gameId: String(id) }}>
+      <Link to="/$gameId" params={{ gameId: String(id) }} search={{source:game.source}}>
         <Card
           id={id}
           name={game.name}
