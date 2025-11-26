@@ -9,7 +9,7 @@ export const Card = ({
   rating,
   genres,
   tags,
-  description,
+  description_raw,
   favorite,
   released,
   developers: developedBy,
@@ -18,7 +18,7 @@ export const Card = ({
     ? "/assets/Activated-favs.svg"
     : "/assets/Deactivated-favs.svg";
   const imgRoute = background_image ? background_image : placeholderImage;
-  // console.log({ id, name, background_image, genres, released, favorite, tags });
+  
   return (
     <div className={styles.cardContainer}>
       <div className="logoContainer">
@@ -42,7 +42,7 @@ export const Card = ({
 
         {rating && (
           <p className={styles.rating}>
-            <span className={styles.spnRate}>{rating}</span>/10
+            <span className={styles.spnRate}>{rating}</span>/5
             <img
               src="/assets/Star-icon.svg"
               alt="Star Icon represeting quantity of stars in the game's rating"
@@ -82,7 +82,7 @@ export const Card = ({
             <span className={styles.releaseDate}>{released}</span>
           </p>
         )}
-        {description && <p className={styles.description}>{description}</p>}
+        {description_raw && <p className={styles.description}>{description_raw}</p>}
       </div>
     </div>
   );
