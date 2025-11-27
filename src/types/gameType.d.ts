@@ -3,7 +3,7 @@ import { Tag } from "./tag";
 import { Requirement } from "./requirements";
 import { Platforms } from "./platform";
 import type { Screenshots } from "./shortScreenshots";
-import type { Store, StoreList } from "./storesType";
+import type { StoreGameDetail } from "./storesType";
 import type { ratings } from "./note";
 import type { Slug } from "./slugType";
 import type { Platform } from "./platformType";

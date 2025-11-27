@@ -7,12 +7,11 @@ export interface Store extends Slug{
 export interface StoreGameDetail {
   id: number;
   url: string;
-  store: {
-    id: number;
-    name: string;
-    slug: string;
-    domain: string;
-    games_count: number;
-    image_background: string;
-  };
+  store: Store;
+}
+export interface StoreApiResponse{
+  count:number,
+  next:null | string,
+  prev: null | string,
+  results: Store[]
 }

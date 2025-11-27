@@ -7,6 +7,7 @@ import { CardForm } from "../CardGame/CardsForm/CardsForm";
 import { GamesForm } from "../GamesForm/GamesForm";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
 import styles from "./CreateGame.module.scss";
+import { useFetchStores } from "../../hooks/useFetchStores";
 
 type GamesCardProps = Partial<Game>;
 export const CreateGame = () => {
@@ -14,7 +15,7 @@ export const CreateGame = () => {
   useFetchGenres()
   useFetchTags()
   useFetchPlatforms()
-
+  useFetchStores()
 
   const [selectedGame, setSelectedGame] = useState<
     GamesCardProps | undefined

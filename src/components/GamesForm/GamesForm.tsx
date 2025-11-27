@@ -8,6 +8,7 @@ import { useEditGameServer } from "../../hooks/useEditGameServer";
 import { useGenreStore } from "../../store/genresStore";
 import { useTagsStore } from "../../store/tagsStore";
 import { usePlatformStore } from "../../store/platformsStore";
+import { useStoresStore } from "../../store/storesStore";
 
 type GamesFormProps = {
   selectedGame: Partial<Game> | undefined;
@@ -41,15 +42,6 @@ const mockPublishers: OptionGroup[] = [
   },
 ];
 
-const mockStores: OptionGroup[] = [
-  {
-    label: "Tiendas",
-    optionItems: [
-      { label: "Steam", value: "steam" },
-      { label: "Epic Games", value: "epic" },
-    ],
-  },
-];
 
 
 const createOptionGroup=(optionsArray:any[],labelValue:string)=>{
@@ -64,7 +56,6 @@ export const GamesForm = ({
   setSelectedGame,
   allDevelopers=mockDevelopers,
   allPublishers = mockPublishers,
-  allStores = mockStores,
   
   isEdit = false,
 }: GamesFormProps) => {
@@ -73,6 +64,7 @@ export const GamesForm = ({
   const { genres } = useGenreStore();
   const { tags } = useTagsStore();
   const { platforms } = usePlatformStore();
+  const {stores}=useStoresStore();
   const [formData, setFormData] = useState<Partial<Game>>(selectedGame || {});
   const genresOption = genres.map((g) => ({
     label: g.slug,
@@ -86,8 +78,10 @@ export const GamesForm = ({
     label:p.name,
     value:p.slug
   }))
-  
- 
+  const storesOptions=stores.map((s)=>({
+    label:s.name,
+    value:s.slug,
+  }))
   useEffect(() => {
     setFormData(selectedGame || {});
   }, [selectedGame]);
@@ -279,7 +273,7 @@ export const GamesForm = ({
             value: s.slug,
           })) || []
         }
-        options={allStores}
+        options={createOptionGroup(storesOptions,"Tiendas: ")}
         onChange={(val) => handleChange("stores", normalizeOptionsToSlugs(val))}
       />
 
