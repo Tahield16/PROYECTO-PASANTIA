@@ -275,8 +275,8 @@ export const GamesForm = ({
         isMultiple={true}
         value={
           formData.stores?.map((s) => ({
-            label: s.store.name,
-            value: s.store.slug,
+            label: s.name,
+            value: s.slug,
           })) || []
         }
         options={allStores}

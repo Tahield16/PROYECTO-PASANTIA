@@ -97,7 +97,9 @@ export const FiltersContainer = () => {
       <CustomCombobox
         value={
           filters.genres && filters.genres.length > 0
-            ? { id: filters.genres[0], name: String(filters.genres[0]) }
+            ? genres.find(
+                (g) => String(g.id) === String(filters.genres?.[0])
+              ) || null
             : null
         }
         onChange={(option: OptionCombo | null) => {
@@ -105,7 +107,7 @@ export const FiltersContainer = () => {
           set({
             filters: {
               ...filters,
-              genres: option ? [option.name] : [],
+              genres: option ? [String(option.id)] : [],
             },
           });
         }}
