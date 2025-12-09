@@ -1,20 +1,19 @@
-import { useGamesStore } from "../../store/gamesStoreApi";
 import { useState } from "react";
+import { useFetchGameServerById } from "../../hooks/useFetchGameServerById";
+import { useSelectedGameServerStore } from "../../store/selectedGameServerStore";
 import type { Game } from "../../types/gameType";
+import { CardForm } from "../CardGame/CardsForm/CardsForm";
 import { GamesForm } from "../GamesForm/GamesForm";
 import { TitleTextContainer } from "../TitleTextContainer/TitleTextContainer";
-import { CardForm } from "../CardGame/CardsForm/CardsForm";
 import styles from "./EditGame.module.scss";
 interface EditGameProps {
-  _id: number | string;
+  id: number ;
 }
 type GamesCardProps = Partial<Game>;
-export const EditGame = ({ _id }: EditGameProps) => {
-  const { games } = useGamesStore();
-  const [selectedGame, setSelectedGame] = useState<GamesCardProps | undefined>(
-    () => games.find((g) => g.id === _id)
-  );
-
+export const EditGame = ({ id }: EditGameProps) => {
+ useFetchGameServerById(id);
+ const {game}=useSelectedGameServerStore();
+ const [selectedGame, setSelectedGame]=useState<GamesCardProps | null>(game);
   return (
     <main className={styles.editGameContainer}>
       <div className="formContainer">

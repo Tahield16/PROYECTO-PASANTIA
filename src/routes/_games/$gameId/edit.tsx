@@ -12,7 +12,7 @@ function RouteComponent() {
   const gameIdNumber=Number(gameId)
   return (
   
-      <EditGame _id={gameIdNumber}/>
+      <EditGame id={gameIdNumber}/>
     
   );
 }
