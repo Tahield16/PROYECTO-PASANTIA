@@ -26,3 +26,4 @@ dist-ssr
 # Files of example
 example-api-call.json
 .tanstack/tmp
+historial_commits.txt
