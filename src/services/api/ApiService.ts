@@ -2,6 +2,7 @@ import type { GamesResponse } from "../../types/gamesAPIResponse";
 import type { FilterGameList, Game } from "../../types/gameType";
 import type { GenreApiResponse } from "../../types/genreType";
 import type { PlatformResponse } from "../../types/platformType";
+import type { publishersApiResponse } from "../../types/publishersType";
 import type { StoreApiResponse } from "../../types/storesType";
 import type { TagResponse } from "../../types/tag";
 import { verifyDates } from "../../utils/verifyDates";
@@ -36,17 +37,21 @@ const getPlatforms = (): Promise<PlatformResponse> => {
     return r as unknown as PlatformResponse;
   });
 };
-const getStoreList= ():Promise<StoreApiResponse>=> {
-  return axiosInstance.get("/stores").then((r)=>{
-    return r as  unknown as StoreApiResponse;
-  })
-  
-}
+const getStoreList = (): Promise<StoreApiResponse> => {
+  return axiosInstance.get("/stores").then((r) => {
+    return r as unknown as StoreApiResponse;
+  });
+};
+const getPublishers = (): Promise<publishersApiResponse> => {
+  return axiosInstance.get("/publishers").then((r)=>r.data )
+};
+
 export const ApiService = {
   getGames,
   getGameById,
   getGenres,
   getTags,
   getPlatforms,
-  getStoreList
+  getStoreList,
+  getPublishers,
 };
